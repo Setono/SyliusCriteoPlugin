@@ -35,30 +35,29 @@ return [
     // Use this bundle or override layout.html.twig as described at https://github.com/Setono/TagBagBundle#usage
     Setono\SyliusTagBagPlugin\SetonoSyliusTagBagPlugin::class => ['all' => true],
 
-    Setono\SyliusAddwishPlugin\SetonoSyliusAddwishPlugin::class => ['all' => true],
+    Setono\SyliusCriteoPlugin\SetonoSyliusCriteoPlugin::class => ['all' => true],
 ];
 ```
 
 ### Step 3: Create configuration 
 
 ```bash
-# config/packages/setono_sylius_addwish.yaml
-setono_sylius_addwish:
-    partner_id: "%env(ADDWISH_PARTNER_ID)%"
+# config/packages/setono_sylius_criteo.yaml
+setono_sylius_criteo:
+    account_id: "%env(CRITEO_ACCOUNT_ID)%"
 ```
 
 ```
 # .env
 
-# Get it at https://addwish.com/company/signin.html
-ADDWISH_PARTNER_ID=YOUR_PARTNER_ID
+CRITEO_ACCOUNT_ID=YOUR_ACCOUNT_ID
 ```
 
-[ico-version]: https://img.shields.io/packagist/v/setono/sylius-addwish-plugin.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/setono/sylius-criteo-plugin.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://travis-ci.com/Setono/SyliusAddwishPlugin.svg?branch=master
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusAddwishPlugin.svg?style=flat-square
+[ico-travis]: https://travis-ci.com/Setono/SyliusCriteoPlugin.svg?branch=master
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusCriteoPlugin.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/setono/sylius-addwish-plugin
-[link-travis]: https://travis-ci.com/Setono/SyliusAddwishPlugin
-[link-code-quality]: https://scrutinizer-ci.com/g/Setono/SyliusAddwishPlugin
+[link-packagist]: https://packagist.org/packages/setono/sylius-criteo-plugin
+[link-travis]: https://travis-ci.com/Setono/SyliusCriteoPlugin
+[link-code-quality]: https://scrutinizer-ci.com/g/Setono/SyliusCriteoPlugin
