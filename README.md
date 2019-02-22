@@ -44,7 +44,7 @@ return [
 ```bash
 # config/packages/setono_sylius_criteo.yaml
 setono_sylius_criteo:
-    account_id: "%env(CRITEO_ACCOUNT_ID)%"
+    account_id: "%env(int:CRITEO_ACCOUNT_ID)%"
 ```
 
 ```
