@@ -4,6 +4,9 @@ Feature: Tracking is in place
   As a Visitor
   I need to be able to find the tracking library in the code
 
+  Background:
+    Given the store operates on a single channel in "United States"
+
   Scenario: Visiting the home page
     When a customer visits the home page
     Then he will find the tracking library in the code
