@@ -1,9 +1,9 @@
-# Put your Behat suites definitions here
-
 default:
     suites:
-        greeting_customer:
+        tracking:
             contexts:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.setup.channel
                 - setono_sylius_criteo_plugin.behat.context.ui.shop.tracking
 
             filters:
