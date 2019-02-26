@@ -1,0 +1,43 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Setono\SyliusCriteoPlugin\EventListener;
+
+use Setono\SyliusCriteoPlugin\Tag\Tags;
+use Setono\TagBagBundle\Tag\TagInterface;
+use Setono\TagBagBundle\Tag\TwigTag;
+use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+
+final class ViewBasketSubscriber extends RouteTagSubscriber
+{
+    /**
+     * @var CartContextInterface
+     */
+    private $cartContext;
+
+    public function __construct(TagBagInterface $tagBag, string $route, CartContextInterface $cartContext)
+    {
+        parent::__construct($tagBag, $route);
+
+        $this->cartContext = $cartContext;
+    }
+
+    public function add(GetResponseEvent $event): void
+    {
+        if (!$this->guardRoute($event)) {
+            return;
+        }
+
+        $cart = $this->cartContext->getCart();
+
+        $this->tagBag->add(new TwigTag(
+            '@SetonoSyliusCriteoPlugin/Tag/view_basket.js.twig',
+            TagInterface::TYPE_SCRIPT,
+            Tags::TAG_VIEW_BASKET,
+            ['cart' => $cart]
+        ), TagBagInterface::SECTION_BODY_END);
+    }
+}

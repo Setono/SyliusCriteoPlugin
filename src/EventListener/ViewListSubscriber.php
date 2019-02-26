@@ -37,13 +37,16 @@ final class ViewListSubscriber extends TagSubscriber
 
     public function add(ResourceControllerEvent $event): void
     {
-        $resourceGridView = $event->getSubject();
+        $subject = $event->getSubject();
 
-        if (!$resourceGridView instanceof ResourceGridView) {
+        if ($subject instanceof ResourceGridView) {
+            $products = $subject->getData();
+        } elseif (is_iterable($subject)) {
+            $products = $subject;
+        } else {
             return;
         }
 
-        $products = $resourceGridView->getData();
         $productIds = [];
 
         $i = 0;

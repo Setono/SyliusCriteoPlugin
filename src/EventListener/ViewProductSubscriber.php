@@ -11,7 +11,7 @@ use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Product\Model\ProductInterface;
 
-final class ProductSubscriber extends TagSubscriber
+final class ViewProductSubscriber extends TagSubscriber
 {
     /**
      * @var ProductIdResolverInterface
@@ -44,7 +44,7 @@ final class ProductSubscriber extends TagSubscriber
 
         $this->tagBag->add(new ScriptTag(
             sprintf('window.criteo_q.push({ event: "viewItem", item: "%s" });', $this->productIdResolver->resolve($product)),
-            Tags::TAG_PRODUCT
+            Tags::TAG_VIEW_PRODUCT
         ), TagBagInterface::SECTION_BODY_END);
     }
 }

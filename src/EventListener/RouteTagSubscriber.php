@@ -4,24 +4,20 @@ declare(strict_types=1);
 
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
-use Setono\SyliusCriteoPlugin\Tag\Tags;
-use Setono\TagBagBundle\Tag\ScriptTag;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final class HomeSubscriber extends TagSubscriber
+abstract class RouteTagSubscriber extends TagSubscriber
 {
-    /**
-     * @var string
-     */
-    private $homeRoute;
+    private $route;
 
-    public function __construct(TagBagInterface $tagBag, string $homeRoute)
+    public function __construct(TagBagInterface $tagBag, string $route)
     {
         parent::__construct($tagBag);
 
-        $this->homeRoute = $homeRoute;
+        $this->route = $route;
     }
 
     public static function getSubscribedEvents(): array
@@ -33,23 +29,25 @@ final class HomeSubscriber extends TagSubscriber
         ];
     }
 
-    public function add(GetResponseEvent $event): void
+    abstract public function add(GetResponseEvent $event): void;
+
+    protected function guardRoute(GetResponseEvent $event): bool
     {
         if (!$event->isMasterRequest()) {
-            return;
+            return false;
         }
 
         $request = $event->getRequest();
 
         // Only add on 'real' page loads, not AJAX requests like add to cart
         if ($request->isXmlHttpRequest()) {
-            return;
+            return false;
         }
 
-        if ($request->attributes->get('_route') !== $this->homeRoute) {
-            return;
+        if ($request->attributes->get('_route') !== $this->route) {
+            return false;
         }
 
-        $this->tagBag->add(new ScriptTag('window.criteo_q.push({ event: "viewHome"});', Tags::TAG_HOME), TagBagInterface::SECTION_BODY_END);
+        return true;
     }
 }

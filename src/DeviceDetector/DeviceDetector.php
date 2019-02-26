@@ -6,15 +6,9 @@ namespace Setono\SyliusCriteoPlugin\DeviceDetector;
 
 use DeviceDetector\DeviceDetector as BaseDeviceDetector;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class DeviceDetector implements DeviceDetectorInterface
 {
-    /**
-     * @var SessionInterface
-     */
-    private $session;
-
     /**
      * @var RequestStack
      */
@@ -25,37 +19,26 @@ final class DeviceDetector implements DeviceDetectorInterface
      */
     private $deviceDetector;
 
-    public function __construct(SessionInterface $session, RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack)
     {
-        $this->session = $session;
         $this->requestStack = $requestStack;
     }
 
     public function isMobile(): bool
     {
-        $deviceDetector = $this->getDeviceDetector();
-
-        return $this->check('setono_sylius_criteo_mobile', [$deviceDetector, 'isMobile']);
+        return $this->check('isMobile');
     }
 
     public function isTablet(): bool
     {
-        $deviceDetector = $this->getDeviceDetector();
-
-        return $this->check('setono_sylius_criteo_tablet', [$deviceDetector, 'isTablet']);
+        return $this->check('isTablet');
     }
 
-    private function check(string $key, callable $result): bool
+    private function check(string $checkMethod): bool
     {
-        if ($this->session->has($key)) {
-            return (bool) $this->session->get($key);
-        }
+        $deviceDetector = $this->getDeviceDetector();
 
-        $res = $result();
-
-        $this->session->set($key, $res);
-
-        return $res;
+        return $deviceDetector->{$checkMethod}();
     }
 
     private function getDeviceDetector(): BaseDeviceDetector
@@ -64,9 +47,9 @@ final class DeviceDetector implements DeviceDetectorInterface
             $ua = '';
 
             $currentRequest = $this->requestStack->getCurrentRequest();
-            if(null !== $currentRequest) {
+            if (null !== $currentRequest) {
                 $ua = $currentRequest->headers->get('User-Agent');
-                if(is_array($ua)) {
+                if (is_array($ua)) {
                     $ua = $ua[0];
                 }
             }

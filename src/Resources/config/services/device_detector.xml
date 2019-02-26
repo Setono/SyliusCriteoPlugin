@@ -4,7 +4,6 @@
     <services>
         <service id="setono_sylius_criteo.device_detector.device_detector"
                  class="Setono\SyliusCriteoPlugin\DeviceDetector\DeviceDetector">
-            <argument type="service" id="session"/>
             <argument type="service" id="request_stack"/>
         </service>
     </services>

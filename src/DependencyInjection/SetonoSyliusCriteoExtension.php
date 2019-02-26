@@ -23,6 +23,7 @@ final class SetonoSyliusCriteoExtension extends Extension
 
         $container->setParameter('setono_sylius_criteo.account_id', $config['account_id']);
         $container->setParameter('setono_sylius_criteo.routes.home', $config['routes']['home']);
+        $container->setParameter('setono_sylius_criteo.routes.cart', $config['routes']['cart']);
 
         $loader->load('services.xml');
     }
