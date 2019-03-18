@@ -34,10 +34,6 @@ final class AccountContext implements AccountContextInterface
      */
     public function getAccount(): ?AccountInterface
     {
-        try {
-            return $this->accountRepository->findOneByChannel($this->channelContext->getChannel());
-        } catch (ChannelNotFoundException $e) {
-            return null;
-        }
+        return $this->accountRepository->findOneByChannel($this->channelContext->getChannel());
     }
 }
