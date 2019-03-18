@@ -14,9 +14,9 @@ abstract class RouteTagSubscriber extends TagSubscriber
 {
     private $route;
 
-    public function __construct(TagBagInterface $tagBag, AccountContextInterface $account, string $route)
+    public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext, string $route)
     {
-        parent::__construct($tagBag, $account);
+        parent::__construct($tagBag, $accountContext);
 
         $this->route = $route;
     }

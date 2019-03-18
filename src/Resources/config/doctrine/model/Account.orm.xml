@@ -15,7 +15,7 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <field name="accountId" type="string" />
+        <field name="accountId" type="string" unique="true" />
         <field name="enabled" column="enabled" type="boolean" />
 
         <one-to-one field="channel" target-entity="Sylius\Component\Channel\Model\ChannelInterface" />

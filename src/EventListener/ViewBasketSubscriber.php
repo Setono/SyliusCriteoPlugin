@@ -19,9 +19,9 @@ final class ViewBasketSubscriber extends RouteTagSubscriber
      */
     private $cartContext;
 
-    public function __construct(TagBagInterface $tagBag, AccountContextInterface $account, string $route, CartContextInterface $cartContext)
+    public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext, string $route, CartContextInterface $cartContext)
     {
-        parent::__construct($tagBag, $account, $route);
+        parent::__construct($tagBag, $accountContext, $route);
 
         $this->cartContext = $cartContext;
     }

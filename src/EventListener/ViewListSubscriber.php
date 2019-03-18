@@ -20,9 +20,9 @@ final class ViewListSubscriber extends TagSubscriber
      */
     private $productIdResolver;
 
-    public function __construct(TagBagInterface $tagBag, AccountContextInterface $account, ProductIdResolverInterface $productIdResolver)
+    public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext, ProductIdResolverInterface $productIdResolver)
     {
-        parent::__construct($tagBag, $account);
+        parent::__construct($tagBag, $accountContext);
 
         $this->productIdResolver = $productIdResolver;
     }

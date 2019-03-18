@@ -20,9 +20,9 @@ final class AddLibrarySubscriber extends TagSubscriber
      */
     private $siteTypeResolver;
 
-    public function __construct(TagBagInterface $tagBag, AccountContextInterface $account, SiteTypeResolver $siteTypeResolver)
+    public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext, SiteTypeResolver $siteTypeResolver)
     {
-        parent::__construct($tagBag, $account);
+        parent::__construct($tagBag, $accountContext);
 
         $this->siteTypeResolver = $siteTypeResolver;
     }
