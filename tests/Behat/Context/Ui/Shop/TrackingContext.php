@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Setono\SyliusCriteoPlugin\Behat\Context\Ui\Shop;
 
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Setono\SyliusCriteoPlugin\Model\Account;
 use Setono\SyliusCriteoPlugin\Repository\AccountRepositoryInterface;
 use Sylius\Component\Channel\Context\CachedPerRequestChannelContext;
-use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Tests\Setono\SyliusCriteoPlugin\Behat\Page\Shop\HomePage;
 use Webmozart\Assert\Assert;
 
