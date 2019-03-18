@@ -38,13 +38,13 @@ final class TrackingContext implements Context
     }
 
     /**
-     * @Given a criteo account is made for current channel
+     * @Given a criteo account with account id :accountId is made for current channel
      */
-    public function aCriteoAccountIsMadeForCurrentChannel()
+    public function aCriteoAccountWithAccountIdIsMadeForCurrentChannel($accountId)
     {
         $account = new Account();
         $account->setChannel($this->channelContext->getChannel());
-        $account->setAccountId("1234");
+        $account->setAccountId($accountId);
         $account->enable();
         $this->accountRepository->add($account);
     }

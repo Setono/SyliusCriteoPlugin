@@ -6,7 +6,7 @@ Feature: Tracking is in place
 
   Background:
     Given the store operates on a single channel in "United States"
-    And a criteo account is made for current channel
+    And a criteo account with account id "1234" is made for current channel
 
   Scenario: Visiting the home page
     When a customer visits the home page
