@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Setono\SyliusCriteoPlugin\DependencyInjection;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
-use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationValuesAreValidConstraint;
 use PHPUnit\Framework\TestCase;
 use Setono\SyliusCriteoPlugin\DependencyInjection\Configuration;
 
@@ -18,7 +17,6 @@ final class ConfigurationTest extends TestCase
         return new Configuration();
     }
 
-
     /**
      * @test
      */
@@ -28,9 +26,9 @@ final class ConfigurationTest extends TestCase
             [
                 [
                     'routes' => [
-                        'home' => 'test'
-                    ]
-                ]
+                        'home' => 'test',
+                    ],
+                ],
             ]
         );
     }

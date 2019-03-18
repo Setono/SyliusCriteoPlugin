@@ -63,11 +63,13 @@
     "scripts": {
         "check-style": [
             "./vendor/bin/ecs check src",
-            "./vendor/bin/ecs check tests/Behat"
+            "./vendor/bin/ecs check tests/Behat",
+            "./vendor/bin/ecs check tests/phpunit"
         ],
         "fix-style": [
             "./vendor/bin/ecs check src --fix",
-            "./vendor/bin/ecs check tests/Behat --fix"
+            "./vendor/bin/ecs check tests/Behat --fix",
+            "./vendor/bin/ecs check tests/phpunit --fix"
         ],
         "analyse": [
             "@ensure-test-container-exists",
