@@ -1,0 +1,2 @@
+setono_analytics_plugin:
+    resource: "@SetonoSyliusCriteoPlugin/Resources/config/routing.yaml"

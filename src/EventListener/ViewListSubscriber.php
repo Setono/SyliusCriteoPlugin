@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
+use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\ProductIdResolverInterface;
 use Setono\SyliusCriteoPlugin\Tag\Tags;
 use Setono\TagBagBundle\Tag\TagInterface;
@@ -19,9 +20,9 @@ final class ViewListSubscriber extends TagSubscriber
      */
     private $productIdResolver;
 
-    public function __construct(TagBagInterface $tagBag, ProductIdResolverInterface $productIdResolver)
+    public function __construct(TagBagInterface $tagBag, AccountContextInterface $account, ProductIdResolverInterface $productIdResolver)
     {
-        parent::__construct($tagBag);
+        parent::__construct($tagBag, $account);
 
         $this->productIdResolver = $productIdResolver;
     }
@@ -37,6 +38,10 @@ final class ViewListSubscriber extends TagSubscriber
 
     public function add(ResourceControllerEvent $event): void
     {
+        if ($this->accountContext->getAccount() === null) {
+            return;
+        }
+
         $subject = $event->getSubject();
 
         if ($subject instanceof ResourceGridView) {

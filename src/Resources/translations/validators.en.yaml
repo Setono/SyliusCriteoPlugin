@@ -1,0 +1,6 @@
+setono_sylius_analytics:
+    property:
+        account_id:
+            not_blank: Account id cannot be blank.
+            min_length: Account id must be at least {{ limit }} characters long.
+            max_length: Account id can not be longer than {{ limit }} characters.

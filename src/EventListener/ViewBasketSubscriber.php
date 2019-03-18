@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
+use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Tag\Tags;
 use Setono\TagBagBundle\Tag\TagInterface;
 use Setono\TagBagBundle\Tag\TwigTag;
@@ -18,9 +19,9 @@ final class ViewBasketSubscriber extends RouteTagSubscriber
      */
     private $cartContext;
 
-    public function __construct(TagBagInterface $tagBag, string $route, CartContextInterface $cartContext)
+    public function __construct(TagBagInterface $tagBag, AccountContextInterface $account, string $route, CartContextInterface $cartContext)
     {
-        parent::__construct($tagBag, $route);
+        parent::__construct($tagBag, $account, $route);
 
         $this->cartContext = $cartContext;
     }
@@ -28,6 +29,10 @@ final class ViewBasketSubscriber extends RouteTagSubscriber
     public function add(GetResponseEvent $event): void
     {
         if (!$this->guardRoute($event)) {
+            return;
+        }
+
+        if ($this->accountContext->getAccount() === null) {
             return;
         }
 
