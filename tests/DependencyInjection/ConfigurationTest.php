@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Setono\SyliusCriteoPlugin\DependencyInjection;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationValuesAreValidConstraint;
 use PHPUnit\Framework\TestCase;
 use Setono\SyliusCriteoPlugin\DependencyInjection\Configuration;
 
@@ -17,16 +18,6 @@ final class ConfigurationTest extends TestCase
         return new Configuration();
     }
 
-    /**
-     * @test
-     */
-    public function invalidIfRequiredValueIsNotProvided(): void
-    {
-        $this->assertConfigurationIsInvalid(
-            [[]],
-            'The child node "account_id" at path "setono_sylius_criteo" must be configured.'
-        );
-    }
 
     /**
      * @test
@@ -36,7 +27,6 @@ final class ConfigurationTest extends TestCase
         $this->assertConfigurationIsValid(
             [
                 [
-                    'account_id' => 123,
                     'routes' => [
                         'home' => 'test'
                     ]
