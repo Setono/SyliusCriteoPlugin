@@ -39,19 +39,9 @@ return [
 ];
 ```
 
-### Step 3: Create configuration 
+### Step 3: Setup account
 
-```bash
-# config/packages/setono_sylius_criteo.yaml
-setono_sylius_criteo:
-    account_id: "%env(int:CRITEO_ACCOUNT_ID)%"
-```
-
-```
-# .env
-
-CRITEO_ACCOUNT_ID=YOUR_ACCOUNT_ID
-```
+Login to your Sylius app admin and go to the Criteo page and click "Create" to create a new account. Fill in the account id of your Criteo account, make sure "enable" is toggled on, and choose which channel the Criteo account should be applied to. Please notice you should only make one account for each channel, or else you will end up with undefined behaviour.
 
 [ico-version]: https://img.shields.io/packagist/v/setono/sylius-criteo-plugin.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
