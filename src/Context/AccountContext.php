@@ -7,7 +7,6 @@ namespace Setono\SyliusCriteoPlugin\Context;
 use Setono\SyliusCriteoPlugin\Model\AccountInterface;
 use Setono\SyliusCriteoPlugin\Repository\AccountRepositoryInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Channel\Context\ChannelNotFoundException;
 
 final class AccountContext implements AccountContextInterface
 {
