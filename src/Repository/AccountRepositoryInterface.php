@@ -11,7 +11,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface AccountRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Returns the account that is enabled on the given channel
+     * Returns the account that is enabled on the given channel or null if no account is enabled for the given channel
      *
      * @param ChannelInterface $channel
      *

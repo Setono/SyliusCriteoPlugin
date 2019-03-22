@@ -2,7 +2,6 @@ setono_sylius_criteo:
     account:
         account_id:
             not_blank: Account id cannot be blank.
-            min_length: Account id must be at least {{ limit }} characters long.
-            max_length: Account id can not be longer than {{ limit }} characters.
+            greather_than: Account id must be greather than {{ compared_value }}.
         channel:
             not_null: You need to select a channel

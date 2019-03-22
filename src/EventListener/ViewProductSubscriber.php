@@ -37,13 +37,13 @@ final class ViewProductSubscriber extends TagSubscriber
 
     public function add(ResourceControllerEvent $event): void
     {
-        if ($this->accountContext->getAccount() === null) {
-            return;
-        }
-
         $product = $event->getSubject();
 
         if (!$product instanceof ProductInterface) {
+            return;
+        }
+
+        if (!$this->hasAccount()) {
             return;
         }
 

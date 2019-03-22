@@ -47,8 +47,7 @@ final class AddLibrarySubscriber extends TagSubscriber
             return;
         }
 
-        $account = $this->accountContext->getAccount();
-        if ($account === null) {
+        if (!$this->hasAccount()) {
             return;
         }
 
@@ -63,7 +62,7 @@ final class AddLibrarySubscriber extends TagSubscriber
             TagInterface::TYPE_SCRIPT,
             Tags::TAG_DEFAULT_EVENTS,
             [
-                'account_id' => $account->getAccountId(),
+                'account_id' => $this->getAccount()->getAccountId(),
                 'site_type' => $this->siteTypeResolver->resolve(),
             ]
         ), TagBagInterface::SECTION_BODY_END);

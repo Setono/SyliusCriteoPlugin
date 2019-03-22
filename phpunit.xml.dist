@@ -7,7 +7,7 @@
          bootstrap="tests/Application/config/bootstrap.php">
     <testsuites>
         <testsuite name="SetonoSyliusCriteoPlugin Test Suite">
-            <directory>tests/phpunit</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 

@@ -38,10 +38,6 @@ final class ViewListSubscriber extends TagSubscriber
 
     public function add(ResourceControllerEvent $event): void
     {
-        if ($this->accountContext->getAccount() === null) {
-            return;
-        }
-
         $subject = $event->getSubject();
 
         if ($subject instanceof ResourceGridView) {
@@ -49,6 +45,10 @@ final class ViewListSubscriber extends TagSubscriber
         } elseif (is_iterable($subject)) {
             $products = $subject;
         } else {
+            return;
+        }
+
+        if (!$this->hasAccount()) {
             return;
         }
 

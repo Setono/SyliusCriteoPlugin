@@ -24,13 +24,13 @@ final class TrackTransactionSubscriber extends TagSubscriber
 
     public function add(ResourceControllerEvent $event): void
     {
-        if ($this->accountContext->getAccount() === null) {
-            return;
-        }
-
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
+            return;
+        }
+
+        if (!$this->hasAccount()) {
             return;
         }
 

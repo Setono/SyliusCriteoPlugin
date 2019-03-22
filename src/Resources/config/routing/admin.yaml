@@ -7,7 +7,7 @@ setono_sylius_criteo_admin_account:
         grid: setono_sylius_criteo_admin_account
         vars:
             all:
-                subheader: setono_sylius_criteo.ui.account
+                subheader: setono_sylius_criteo.ui.manage_accounts
             index:
-                icon: 'file image outline'
+                icon: 'sync'
     type: sylius.resource

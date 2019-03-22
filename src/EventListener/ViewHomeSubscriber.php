@@ -17,7 +17,7 @@ final class ViewHomeSubscriber extends RouteTagSubscriber
             return;
         }
 
-        if ($this->accountContext->getAccount() === null) {
+        if (!$this->hasAccount()) {
             return;
         }
 

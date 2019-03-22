@@ -28,7 +28,7 @@ final class AdminMenuListener
             ->addChild('criteo', [
                 'route' => 'setono_sylius_criteo_admin_account_index',
             ])
-            ->setLabel('setono_sylius_criteo.ui.menu_item')
-            ->setLabelAttribute('icon', 'bullhorn');
+            ->setLabel('setono_sylius_criteo.ui.criteo')
+            ->setLabelAttribute('icon', 'sync');
     }
 }
