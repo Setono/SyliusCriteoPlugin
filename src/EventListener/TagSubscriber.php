@@ -55,8 +55,11 @@ abstract class TagSubscriber implements EventSubscriberInterface
      */
     protected function getAccount(): AccountInterface
     {
-        if (!$this->hasAccount()) {
-            throw new MissingAccount();
+        if (null === $this->account) {
+            $this->account = $this->accountContext->getAccount();
+            if (null === $this->account) {
+                throw new MissingAccount();
+            }
         }
 
         return $this->account;
