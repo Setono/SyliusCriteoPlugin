@@ -47,7 +47,7 @@ abstract class TagSubscriber implements EventSubscriberInterface
     {
         if (null === $this->hasAccount) {
             $account = $this->accountContext->getAccount();
-            if(null !== $account) {
+            if (null !== $account) {
                 $this->account = $account;
                 $this->hasAccount = true;
             } else {
