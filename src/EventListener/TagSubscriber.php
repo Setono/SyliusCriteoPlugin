@@ -23,9 +23,14 @@ abstract class TagSubscriber implements EventSubscriberInterface
     protected $accountContext;
 
     /**
-     * @var AccountInterface|null
+     * @var AccountInterface
      */
     private $account;
+
+    /**
+     * @var bool
+     */
+    private $hasAccount;
 
     public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext)
     {
@@ -40,11 +45,17 @@ abstract class TagSubscriber implements EventSubscriberInterface
      */
     protected function hasAccount(): bool
     {
-        if (null === $this->account) {
-            $this->account = $this->accountContext->getAccount();
+        if (null === $this->hasAccount) {
+            $account = $this->accountContext->getAccount();
+            if(null !== $account) {
+                $this->account = $account;
+                $this->hasAccount = true;
+            } else {
+                $this->hasAccount = false;
+            }
         }
 
-        return null !== $this->account;
+        return $this->hasAccount;
     }
 
     /**
@@ -55,13 +66,10 @@ abstract class TagSubscriber implements EventSubscriberInterface
      */
     protected function getAccount(): AccountInterface
     {
-        if (null === $this->account) {
-            $this->account = $this->accountContext->getAccount();
-            if (null === $this->account) {
-                throw new MissingAccount();
-            }
+        if ($this->hasAccount()) {
+            return $this->account;
         }
 
-        return $this->account;
+        throw new MissingAccount();
     }
 }

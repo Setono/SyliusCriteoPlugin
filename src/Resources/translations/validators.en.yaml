@@ -1,6 +1,7 @@
 setono_sylius_criteo:
     account:
         account_id:
+            unique: Account id is already in use on a different account.
             not_blank: Account id cannot be blank.
             greather_than: Account id must be greather than {{ compared_value }}.
         channel:
