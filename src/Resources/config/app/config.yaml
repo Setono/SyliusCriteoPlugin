@@ -1,0 +1,2 @@
+imports:
+    - "@SetonoSyliusCriteoPlugin/Resources/config/grids/setono_sylius_criteo_admin_account.yaml"

@@ -5,14 +5,15 @@
         <service id="setono_sylius_criteo.event_listener.add_library"
                  class="Setono\SyliusCriteoPlugin\EventListener\AddLibrarySubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_criteo.context.account"/>
             <argument type="service" id="setono_sylius_criteo.resolver.site_type"/>
-            <argument>%setono_sylius_criteo.account_id%</argument>
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="setono_sylius_criteo.event_listener.home"
                  class="Setono\SyliusCriteoPlugin\EventListener\ViewHomeSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_criteo.context.account"/>
             <argument>%setono_sylius_criteo.routes.home%</argument>
             <tag name="kernel.event_subscriber"/>
         </service>
@@ -20,6 +21,7 @@
         <service id="setono_sylius_criteo.event_listener.product"
                  class="Setono\SyliusCriteoPlugin\EventListener\ViewProductSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_criteo.context.account"/>
             <argument type="service" id="setono_sylius_criteo.resolver.product_id"/>
             <tag name="kernel.event_subscriber"/>
         </service>
@@ -27,6 +29,7 @@
         <service id="setono_sylius_criteo.event_listener.view_list"
                  class="Setono\SyliusCriteoPlugin\EventListener\ViewListSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_criteo.context.account"/>
             <argument type="service" id="setono_sylius_criteo.resolver.product_id"/>
             <tag name="kernel.event_subscriber"/>
         </service>
@@ -34,6 +37,7 @@
         <service id="setono_sylius_criteo.event_listener.view_basket"
                  class="Setono\SyliusCriteoPlugin\EventListener\ViewBasketSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_criteo.context.account"/>
             <argument>%setono_sylius_criteo.routes.cart%</argument>
             <argument type="service" id="sylius.context.cart.composite"/>
             <tag name="kernel.event_subscriber"/>
@@ -42,6 +46,7 @@
         <service id="setono_sylius_criteo.event_listener.track_transaction"
                  class="Setono\SyliusCriteoPlugin\EventListener\TrackTransactionSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_sylius_criteo.context.account"/>
             <tag name="kernel.event_subscriber"/>
         </service>
     </services>

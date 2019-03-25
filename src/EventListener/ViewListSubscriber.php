@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
+use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\ProductIdResolverInterface;
 use Setono\SyliusCriteoPlugin\Tag\Tags;
 use Setono\TagBagBundle\Tag\TagInterface;
@@ -19,9 +20,9 @@ final class ViewListSubscriber extends TagSubscriber
      */
     private $productIdResolver;
 
-    public function __construct(TagBagInterface $tagBag, ProductIdResolverInterface $productIdResolver)
+    public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext, ProductIdResolverInterface $productIdResolver)
     {
-        parent::__construct($tagBag);
+        parent::__construct($tagBag, $accountContext);
 
         $this->productIdResolver = $productIdResolver;
     }
@@ -44,6 +45,10 @@ final class ViewListSubscriber extends TagSubscriber
         } elseif (is_iterable($subject)) {
             $products = $subject;
         } else {
+            return;
+        }
+
+        if (!$this->hasAccount()) {
             return;
         }
 

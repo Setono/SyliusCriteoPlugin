@@ -1,0 +1,14 @@
+setono_sylius_criteo:
+    ui:
+        edit_account: Edit account
+        new_account: New account
+        accounts: Criteo Accounts
+        manage_accounts: Manage your Criteo Accounts
+        account_index: Account index
+        account_id: Account id
+        account_id_placeholder: Insert your account id, i.e. 392871
+        channel: Channel
+        select_channel: Select channel...
+        enabled: Enabled
+        criteo: Criteo
+        account: Account

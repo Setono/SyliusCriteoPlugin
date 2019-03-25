@@ -1,0 +1,13 @@
+setono_sylius_criteo_admin_account:
+    resource: |
+        section: admin
+        alias: setono_sylius_criteo.account
+        templates: SyliusAdminBundle:Crud
+        redirect: update
+        grid: setono_sylius_criteo_admin_account
+        vars:
+            all:
+                subheader: setono_sylius_criteo.ui.manage_accounts
+            index:
+                icon: 'sync'
+    type: sylius.resource

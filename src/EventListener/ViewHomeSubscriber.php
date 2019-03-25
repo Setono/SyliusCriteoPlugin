@@ -17,6 +17,10 @@ final class ViewHomeSubscriber extends RouteTagSubscriber
             return;
         }
 
+        if (!$this->hasAccount()) {
+            return;
+        }
+
         $this->tagBag->add(new ScriptTag('window.criteo_q.push({ event: "viewHome"});', Tags::TAG_VIEW_HOME), TagBagInterface::SECTION_BODY_END);
     }
 }

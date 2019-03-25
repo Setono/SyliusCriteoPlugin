@@ -30,6 +30,10 @@ final class TrackTransactionSubscriber extends TagSubscriber
             return;
         }
 
+        if (!$this->hasAccount()) {
+            return;
+        }
+
         $this->tagBag->add(new TwigTag(
             '@SetonoSyliusCriteoPlugin/Tag/track_transaction.js.twig',
             TagInterface::TYPE_SCRIPT,

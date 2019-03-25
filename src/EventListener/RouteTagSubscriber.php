@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
+use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -13,9 +14,9 @@ abstract class RouteTagSubscriber extends TagSubscriber
 {
     private $route;
 
-    public function __construct(TagBagInterface $tagBag, string $route)
+    public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext, string $route)
     {
-        parent::__construct($tagBag);
+        parent::__construct($tagBag, $accountContext);
 
         $this->route = $route;
     }

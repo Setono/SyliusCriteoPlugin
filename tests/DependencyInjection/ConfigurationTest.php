@@ -20,27 +20,15 @@ final class ConfigurationTest extends TestCase
     /**
      * @test
      */
-    public function invalidIfRequiredValueIsNotProvided(): void
-    {
-        $this->assertConfigurationIsInvalid(
-            [[]],
-            'The child node "account_id" at path "setono_sylius_criteo" must be configured.'
-        );
-    }
-
-    /**
-     * @test
-     */
     public function configurationIsValid(): void
     {
         $this->assertConfigurationIsValid(
             [
                 [
-                    'account_id' => 123,
                     'routes' => [
-                        'home' => 'test'
-                    ]
-                ]
+                        'home' => 'test',
+                    ],
+                ],
             ]
         );
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
+use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\ProductIdResolverInterface;
 use Setono\SyliusCriteoPlugin\Tag\Tags;
 use Setono\TagBagBundle\Tag\ScriptTag;
@@ -18,9 +19,9 @@ final class ViewProductSubscriber extends TagSubscriber
      */
     private $productIdResolver;
 
-    public function __construct(TagBagInterface $tagBag, ProductIdResolverInterface $productIdResolver)
+    public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext, ProductIdResolverInterface $productIdResolver)
     {
-        parent::__construct($tagBag);
+        parent::__construct($tagBag, $accountContext);
 
         $this->productIdResolver = $productIdResolver;
     }
@@ -39,6 +40,10 @@ final class ViewProductSubscriber extends TagSubscriber
         $product = $event->getSubject();
 
         if (!$product instanceof ProductInterface) {
+            return;
+        }
+
+        if (!$this->hasAccount()) {
             return;
         }
 

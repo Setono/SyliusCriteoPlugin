@@ -6,6 +6,8 @@
 
         <service id="setono_sylius_criteo_plugin.behat.context.ui.shop.tracking" class="Tests\Setono\SyliusCriteoPlugin\Behat\Context\Ui\Shop\TrackingContext">
             <argument type="service" id="setono_sylius_criteo_plugin.behat.page.shop.home" />
+            <argument type="service" id="setono_sylius_criteo.repository.account" />
+            <argument type="service" id="sylius.context.channel" />
         </service>
 
         <service id="setono_sylius_criteo_plugin.behat.page.shop.home" class="Tests\Setono\SyliusCriteoPlugin\Behat\Page\Shop\HomePage" parent="sylius.behat.page.shop.home" public="false" />

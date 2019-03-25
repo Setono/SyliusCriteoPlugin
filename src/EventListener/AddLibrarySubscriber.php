@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
+use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\SiteTypeResolver;
 use Setono\SyliusCriteoPlugin\Tag\Tags;
 use Setono\TagBagBundle\Tag\TagInterface;
@@ -19,17 +20,11 @@ final class AddLibrarySubscriber extends TagSubscriber
      */
     private $siteTypeResolver;
 
-    /**
-     * @var int
-     */
-    private $accountId;
-
-    public function __construct(TagBagInterface $tagBag, SiteTypeResolver $siteTypeResolver, int $accountId)
+    public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext, SiteTypeResolver $siteTypeResolver)
     {
-        parent::__construct($tagBag);
+        parent::__construct($tagBag, $accountContext);
 
         $this->siteTypeResolver = $siteTypeResolver;
-        $this->accountId = $accountId;
     }
 
     public static function getSubscribedEvents(): array
@@ -52,6 +47,10 @@ final class AddLibrarySubscriber extends TagSubscriber
             return;
         }
 
+        if (!$this->hasAccount()) {
+            return;
+        }
+
         $this->tagBag->add(new TwigTag(
             '@SetonoSyliusCriteoPlugin/Tag/library.html.twig',
             TagInterface::TYPE_HTML,
@@ -63,7 +62,7 @@ final class AddLibrarySubscriber extends TagSubscriber
             TagInterface::TYPE_SCRIPT,
             Tags::TAG_DEFAULT_EVENTS,
             [
-                'account_id' => $this->accountId,
+                'account_id' => $this->getAccount()->getAccountId(),
                 'site_type' => $this->siteTypeResolver->resolve(),
             ]
         ), TagBagInterface::SECTION_BODY_END);
