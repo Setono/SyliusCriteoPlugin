@@ -10,6 +10,7 @@ use Setono\SyliusCriteoPlugin\Tag\Tags;
 use Setono\TagBagBundle\Tag\TagInterface;
 use Setono\TagBagBundle\Tag\TwigTag;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -20,9 +21,14 @@ final class AddLibrarySubscriber extends TagSubscriber
      */
     private $siteTypeResolver;
 
-    public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext, SiteTypeResolver $siteTypeResolver)
-    {
-        parent::__construct($tagBag, $accountContext);
+    public function __construct(
+        TagBagInterface $tagBag,
+        AccountContextInterface $accountContext,
+        SiteTypeResolver $siteTypeResolver,
+        RequestStack $requestStack = null,
+        string $shopContextPattern = null
+    ) {
+        parent::__construct($tagBag, $accountContext, $requestStack, $shopContextPattern);
 
         $this->siteTypeResolver = $siteTypeResolver;
     }
@@ -38,12 +44,14 @@ final class AddLibrarySubscriber extends TagSubscriber
 
     public function add(GetResponseEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        $request = $event->getRequest();
+
+        if (!$event->isMasterRequest() || !$this->isShopContext($request)) {
             return;
         }
 
         // Only add the library on 'real' page loads, not AJAX requests like add to cart
-        if ($event->getRequest()->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
             return;
         }
 

@@ -10,6 +10,7 @@ use Setono\TagBagBundle\Tag\TagInterface;
 use Setono\TagBagBundle\Tag\TwigTag;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 final class ViewBasketSubscriber extends RouteTagSubscriber
@@ -19,9 +20,15 @@ final class ViewBasketSubscriber extends RouteTagSubscriber
      */
     private $cartContext;
 
-    public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext, string $route, CartContextInterface $cartContext)
-    {
-        parent::__construct($tagBag, $accountContext, $route);
+    public function __construct(
+        TagBagInterface $tagBag,
+        AccountContextInterface $accountContext,
+        string $route,
+        CartContextInterface $cartContext,
+        RequestStack $requestStack = null,
+        string $shopContextPattern = null
+    ) {
+        parent::__construct($tagBag, $accountContext, $route, $requestStack, $shopContextPattern);
 
         $this->cartContext = $cartContext;
     }

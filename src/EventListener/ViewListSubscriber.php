@@ -12,6 +12,7 @@ use Setono\TagBagBundle\Tag\TwigTag;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ViewListSubscriber extends TagSubscriber
 {
@@ -20,9 +21,14 @@ final class ViewListSubscriber extends TagSubscriber
      */
     private $productIdResolver;
 
-    public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext, ProductIdResolverInterface $productIdResolver)
-    {
-        parent::__construct($tagBag, $accountContext);
+    public function __construct(
+        TagBagInterface $tagBag,
+        AccountContextInterface $accountContext,
+        ProductIdResolverInterface $productIdResolver,
+        RequestStack $requestStack = null,
+        string $shopContextPattern = null
+    ) {
+        parent::__construct($tagBag, $accountContext, $requestStack, $shopContextPattern);
 
         $this->productIdResolver = $productIdResolver;
     }
@@ -39,6 +45,10 @@ final class ViewListSubscriber extends TagSubscriber
     public function add(ResourceControllerEvent $event): void
     {
         $subject = $event->getSubject();
+
+        if (!$this->isShopContext()) {
+            return;
+        }
 
         if ($subject instanceof ResourceGridView) {
             $products = $subject->getData();

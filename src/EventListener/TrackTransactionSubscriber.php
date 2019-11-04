@@ -30,6 +30,10 @@ final class TrackTransactionSubscriber extends TagSubscriber
             return;
         }
 
+        if (!$this->isShopContext()) {
+            return;
+        }
+
         if (!$this->hasAccount()) {
             return;
         }

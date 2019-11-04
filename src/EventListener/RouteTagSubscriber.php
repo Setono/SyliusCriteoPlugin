@@ -6,7 +6,7 @@ namespace Setono\SyliusCriteoPlugin\EventListener;
 
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -14,9 +14,14 @@ abstract class RouteTagSubscriber extends TagSubscriber
 {
     private $route;
 
-    public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext, string $route)
-    {
-        parent::__construct($tagBag, $accountContext);
+    public function __construct(
+        TagBagInterface $tagBag,
+        AccountContextInterface $accountContext,
+        string $route,
+        RequestStack $requestStack = null,
+        string $shopContextPattern = null
+    ) {
+        parent::__construct($tagBag, $accountContext, $requestStack, $shopContextPattern);
 
         $this->route = $route;
     }
@@ -34,11 +39,11 @@ abstract class RouteTagSubscriber extends TagSubscriber
 
     protected function guardRoute(GetResponseEvent $event): bool
     {
-        if (!$event->isMasterRequest()) {
+        $request = $event->getRequest();
+
+        if (!$event->isMasterRequest() || !$this->isShopContext($request)) {
             return false;
         }
-
-        $request = $event->getRequest();
 
         // Only add on 'real' page loads, not AJAX requests like add to cart
         if ($request->isXmlHttpRequest()) {

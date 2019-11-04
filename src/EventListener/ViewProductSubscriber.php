@@ -11,6 +11,7 @@ use Setono\TagBagBundle\Tag\ScriptTag;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Product\Model\ProductInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ViewProductSubscriber extends TagSubscriber
 {
@@ -19,9 +20,14 @@ final class ViewProductSubscriber extends TagSubscriber
      */
     private $productIdResolver;
 
-    public function __construct(TagBagInterface $tagBag, AccountContextInterface $accountContext, ProductIdResolverInterface $productIdResolver)
-    {
-        parent::__construct($tagBag, $accountContext);
+    public function __construct(
+        TagBagInterface $tagBag,
+        AccountContextInterface $accountContext,
+        ProductIdResolverInterface $productIdResolver,
+        RequestStack $requestStack = null,
+        string $shopContextPattern = null
+    ) {
+        parent::__construct($tagBag, $accountContext, $requestStack, $shopContextPattern);
 
         $this->productIdResolver = $productIdResolver;
     }
@@ -43,12 +49,19 @@ final class ViewProductSubscriber extends TagSubscriber
             return;
         }
 
+        if (!$this->isShopContext()) {
+            return;
+        }
+
         if (!$this->hasAccount()) {
             return;
         }
 
         $this->tagBag->add(new ScriptTag(
-            sprintf('window.criteo_q.push({ event: "viewItem", item: "%s" });', $this->productIdResolver->resolve($product)),
+            sprintf(
+                'window.criteo_q.push({ event: "viewItem", item: "%s" });',
+                $this->productIdResolver->resolve($product)
+            ),
             Tags::TAG_VIEW_PRODUCT
         ), TagBagInterface::SECTION_BODY_END);
     }
