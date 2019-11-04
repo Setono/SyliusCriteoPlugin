@@ -12,7 +12,6 @@ use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Http\FirewallMapInterface;
 
 abstract class TagSubscriber implements EventSubscriberInterface
 {
@@ -37,20 +36,20 @@ abstract class TagSubscriber implements EventSubscriberInterface
     private $hasAccount;
 
     /**
-     * @var RequestStack|null
+     * @var RequestStack
      */
     private $requestStack;
 
     /**
-     * @var FirewallMapInterface|null
+     * @var FirewallMap
      */
     private $firewallMap;
 
     public function __construct(
         TagBagInterface $tagBag,
         AccountContextInterface $accountContext,
-        RequestStack $requestStack = null,
-        FirewallMapInterface $firewallMap = null
+        RequestStack $requestStack,
+        FirewallMap $firewallMap
     ) {
         $this->tagBag = $tagBag;
         $this->accountContext = $accountContext;
@@ -95,19 +94,7 @@ abstract class TagSubscriber implements EventSubscriberInterface
 
     protected function isShopContext(Request $request = null): bool
     {
-        if (null === $this->firewallMap) {
-            return true;
-        }
-
-        if (!$this->firewallMap instanceof FirewallMap) {
-            return true;
-        }
-
         if (null === $request) {
-            if (null === $this->requestStack) {
-                return true;
-            }
-
             $request = $this->requestStack->getCurrentRequest();
             if (null === $request) {
                 return true;

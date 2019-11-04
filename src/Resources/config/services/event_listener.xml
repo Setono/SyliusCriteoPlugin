@@ -8,7 +8,7 @@
             <argument type="service" id="setono_tag_bag.tag_bag"/>
             <argument type="service" id="setono_sylius_criteo.context.account"/>
             <argument type="service" id="setono_sylius_criteo.resolver.site_type"/>
-            <argument type="service" id="request_stack" on-invalid="null"/>
+            <argument type="service" id="request_stack"/>
             <argument type="service" id="security.firewall.map"/>
             <tag name="kernel.event_subscriber"/>
         </service>
@@ -18,7 +18,7 @@
             <argument type="service" id="setono_tag_bag.tag_bag"/>
             <argument type="service" id="setono_sylius_criteo.context.account"/>
             <argument>%setono_sylius_criteo.routes.home%</argument>
-            <argument type="service" id="request_stack" on-invalid="null"/>
+            <argument type="service" id="request_stack"/>
             <argument type="service" id="security.firewall.map"/>
             <tag name="kernel.event_subscriber"/>
         </service>
@@ -28,7 +28,7 @@
             <argument type="service" id="setono_tag_bag.tag_bag"/>
             <argument type="service" id="setono_sylius_criteo.context.account"/>
             <argument type="service" id="setono_sylius_criteo.resolver.product_id"/>
-            <argument type="service" id="request_stack" on-invalid="null"/>
+            <argument type="service" id="request_stack"/>
             <argument type="service" id="security.firewall.map"/>
             <tag name="kernel.event_subscriber"/>
         </service>
@@ -38,7 +38,7 @@
             <argument type="service" id="setono_tag_bag.tag_bag"/>
             <argument type="service" id="setono_sylius_criteo.context.account"/>
             <argument type="service" id="setono_sylius_criteo.resolver.product_id"/>
-            <argument type="service" id="request_stack" on-invalid="null"/>
+            <argument type="service" id="request_stack"/>
             <argument type="service" id="security.firewall.map"/>
             <tag name="kernel.event_subscriber"/>
         </service>
@@ -49,7 +49,7 @@
             <argument type="service" id="setono_sylius_criteo.context.account"/>
             <argument>%setono_sylius_criteo.routes.cart%</argument>
             <argument type="service" id="sylius.context.cart.composite"/>
-            <argument type="service" id="request_stack" on-invalid="null"/>
+            <argument type="service" id="request_stack"/>
             <argument type="service" id="security.firewall.map"/>
             <tag name="kernel.event_subscriber"/>
         </service>
@@ -58,7 +58,7 @@
                  class="Setono\SyliusCriteoPlugin\EventListener\TrackTransactionSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
             <argument type="service" id="setono_sylius_criteo.context.account"/>
-            <argument type="service" id="request_stack" on-invalid="null"/>
+            <argument type="service" id="request_stack"/>
             <argument type="service" id="security.firewall.map"/>
             <tag name="kernel.event_subscriber"/>
         </service>
