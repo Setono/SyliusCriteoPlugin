@@ -13,6 +13,7 @@ use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Http\FirewallMapInterface;
 
 final class ViewListSubscriber extends TagSubscriber
 {
@@ -26,9 +27,9 @@ final class ViewListSubscriber extends TagSubscriber
         AccountContextInterface $accountContext,
         ProductIdResolverInterface $productIdResolver,
         RequestStack $requestStack = null,
-        string $shopContextPattern = null
+        FirewallMapInterface $firewallMap = null
     ) {
-        parent::__construct($tagBag, $accountContext, $requestStack, $shopContextPattern);
+        parent::__construct($tagBag, $accountContext, $requestStack, $firewallMap);
 
         $this->productIdResolver = $productIdResolver;
     }

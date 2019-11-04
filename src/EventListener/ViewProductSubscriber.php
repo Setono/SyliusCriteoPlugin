@@ -12,6 +12,7 @@ use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Http\FirewallMapInterface;
 
 final class ViewProductSubscriber extends TagSubscriber
 {
@@ -25,9 +26,9 @@ final class ViewProductSubscriber extends TagSubscriber
         AccountContextInterface $accountContext,
         ProductIdResolverInterface $productIdResolver,
         RequestStack $requestStack = null,
-        string $shopContextPattern = null
+        FirewallMapInterface $firewallMap = null
     ) {
-        parent::__construct($tagBag, $accountContext, $requestStack, $shopContextPattern);
+        parent::__construct($tagBag, $accountContext, $requestStack, $firewallMap);
 
         $this->productIdResolver = $productIdResolver;
     }

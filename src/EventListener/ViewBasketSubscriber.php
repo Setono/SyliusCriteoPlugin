@@ -12,6 +12,7 @@ use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\Security\Http\FirewallMapInterface;
 
 final class ViewBasketSubscriber extends RouteTagSubscriber
 {
@@ -26,9 +27,9 @@ final class ViewBasketSubscriber extends RouteTagSubscriber
         string $route,
         CartContextInterface $cartContext,
         RequestStack $requestStack = null,
-        string $shopContextPattern = null
+        FirewallMapInterface $firewallMap = null
     ) {
-        parent::__construct($tagBag, $accountContext, $route, $requestStack, $shopContextPattern);
+        parent::__construct($tagBag, $accountContext, $route, $requestStack, $firewallMap);
 
         $this->cartContext = $cartContext;
     }

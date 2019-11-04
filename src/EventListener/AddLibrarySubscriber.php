@@ -10,6 +10,7 @@ use Setono\SyliusCriteoPlugin\Tag\Tags;
 use Setono\TagBagBundle\Tag\TagInterface;
 use Setono\TagBagBundle\Tag\TwigTag;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -26,9 +27,9 @@ final class AddLibrarySubscriber extends TagSubscriber
         AccountContextInterface $accountContext,
         SiteTypeResolver $siteTypeResolver,
         RequestStack $requestStack = null,
-        string $shopContextPattern = null
+        FirewallMap $firewallMap = null
     ) {
-        parent::__construct($tagBag, $accountContext, $requestStack, $shopContextPattern);
+        parent::__construct($tagBag, $accountContext, $requestStack, $firewallMap);
 
         $this->siteTypeResolver = $siteTypeResolver;
     }

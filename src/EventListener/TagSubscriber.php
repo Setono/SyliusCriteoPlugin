@@ -8,9 +8,11 @@ use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Exception\MissingAccount;
 use Setono\SyliusCriteoPlugin\Model\AccountInterface;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Http\FirewallMapInterface;
 
 abstract class TagSubscriber implements EventSubscriberInterface
 {
@@ -40,20 +42,20 @@ abstract class TagSubscriber implements EventSubscriberInterface
     private $requestStack;
 
     /**
-     * @var string|null
+     * @var FirewallMapInterface|null
      */
-    private $shopContextPattern;
+    private $firewallMap;
 
     public function __construct(
         TagBagInterface $tagBag,
         AccountContextInterface $accountContext,
         RequestStack $requestStack = null,
-        string $shopContextPattern = null
+        FirewallMapInterface $firewallMap = null
     ) {
         $this->tagBag = $tagBag;
         $this->accountContext = $accountContext;
         $this->requestStack = $requestStack;
-        $this->shopContextPattern = $shopContextPattern;
+        $this->firewallMap = $firewallMap;
     }
 
     /**
@@ -93,7 +95,11 @@ abstract class TagSubscriber implements EventSubscriberInterface
 
     protected function isShopContext(Request $request = null): bool
     {
-        if (null === $this->shopContextPattern) {
+        if (null === $this->firewallMap) {
+            return true;
+        }
+
+        if (!$this->firewallMap instanceof FirewallMap) {
             return true;
         }
 
@@ -108,9 +114,11 @@ abstract class TagSubscriber implements EventSubscriberInterface
             }
         }
 
-        return preg_match(
-            '#' . str_replace('#', '\#', $this->shopContextPattern) . '#',
-            $request->getPathInfo()
-        ) === 1;
+        $firewallConfig = $this->firewallMap->getFirewallConfig($request);
+        if (null === $firewallConfig) {
+            return true;
+        }
+
+        return $firewallConfig->getName() === 'shop';
     }
 }

@@ -9,6 +9,7 @@ use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Security\Http\FirewallMapInterface;
 
 abstract class RouteTagSubscriber extends TagSubscriber
 {
@@ -19,9 +20,9 @@ abstract class RouteTagSubscriber extends TagSubscriber
         AccountContextInterface $accountContext,
         string $route,
         RequestStack $requestStack = null,
-        string $shopContextPattern = null
+        FirewallMapInterface $firewallMap = null
     ) {
-        parent::__construct($tagBag, $accountContext, $requestStack, $shopContextPattern);
+        parent::__construct($tagBag, $accountContext, $requestStack, $firewallMap);
 
         $this->route = $route;
     }
