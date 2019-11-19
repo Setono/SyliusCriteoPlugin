@@ -17,9 +17,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class AddLibrarySubscriber extends TagSubscriber
 {
-    /**
-     * @var SiteTypeResolver
-     */
+    /** @var SiteTypeResolver */
     private $siteTypeResolver;
 
     public function __construct(

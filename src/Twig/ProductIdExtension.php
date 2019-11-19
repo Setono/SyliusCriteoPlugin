@@ -12,9 +12,7 @@ use Twig\TwigFilter;
 
 final class ProductIdExtension extends AbstractExtension
 {
-    /**
-     * @var ProductIdResolverInterface
-     */
+    /** @var ProductIdResolverInterface */
     private $productIdResolver;
 
     public function __construct(ProductIdResolverInterface $productIdResolver)
@@ -31,8 +29,6 @@ final class ProductIdExtension extends AbstractExtension
 
     /**
      * @param ProductInterface|null $product
-     *
-     * @return string
      */
     public function productId($product): string
     {

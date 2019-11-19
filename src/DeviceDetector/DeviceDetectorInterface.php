@@ -12,15 +12,11 @@ interface DeviceDetectorInterface
 {
     /**
      * Returns true if the users device is a mobile
-     *
-     * @return bool
      */
     public function isMobile(): bool;
 
     /**
      * Returns true if the users device is a tablet
-     *
-     * @return bool
      */
     public function isTablet(): bool;
 }

@@ -11,19 +11,13 @@ class Account implements AccountInterface
 {
     use ToggleableTrait;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $accountId;
 
-    /**
-     * @var ChannelInterface
-     */
+    /** @var ChannelInterface */
     protected $channel;
 
     /**

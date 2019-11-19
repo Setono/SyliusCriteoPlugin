@@ -10,8 +10,6 @@ interface AccountContextInterface
 {
     /**
      * Returns the account enabled for the active channel
-     *
-     * @return AccountInterface|null
      */
     public function getAccount(): ?AccountInterface;
 }

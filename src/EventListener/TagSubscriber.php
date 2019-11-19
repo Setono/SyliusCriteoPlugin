@@ -15,34 +15,22 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 abstract class TagSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var TagBagInterface
-     */
+    /** @var TagBagInterface */
     protected $tagBag;
 
-    /**
-     * @var AccountContextInterface
-     */
+    /** @var AccountContextInterface */
     protected $accountContext;
 
-    /**
-     * @var AccountInterface
-     */
+    /** @var AccountInterface */
     private $account;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $hasAccount;
 
-    /**
-     * @var RequestStack
-     */
+    /** @var RequestStack */
     private $requestStack;
 
-    /**
-     * @var FirewallMap
-     */
+    /** @var FirewallMap */
     private $firewallMap;
 
     public function __construct(
@@ -59,8 +47,6 @@ abstract class TagSubscriber implements EventSubscriberInterface
 
     /**
      * Returns true if an account was found for current account context
-     *
-     * @return bool
      */
     protected function hasAccount(): bool
     {
@@ -80,8 +66,6 @@ abstract class TagSubscriber implements EventSubscriberInterface
     /**
      * Returns the account from account context
      * Throws exception if no account was found
-     *
-     * @return AccountInterface
      */
     protected function getAccount(): AccountInterface
     {

@@ -13,19 +13,13 @@ use Webmozart\Assert\Assert;
 
 final class TrackingContext implements Context
 {
-    /**
-     * @var HomePage
-     */
+    /** @var HomePage */
     private $homePage;
 
-    /**
-     * @var AccountRepositoryInterface
-     */
+    /** @var AccountRepositoryInterface */
     private $accountRepository;
 
-    /**
-     * @var CachedPerRequestChannelContext
-     */
+    /** @var CachedPerRequestChannelContext */
     private $channelContext;
 
     public function __construct(HomePage $homePage, AccountRepositoryInterface $accountRepository, CachedPerRequestChannelContext $channelContext)

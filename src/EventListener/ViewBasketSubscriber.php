@@ -16,9 +16,7 @@ use Symfony\Component\Security\Http\FirewallMapInterface;
 
 final class ViewBasketSubscriber extends RouteTagSubscriber
 {
-    /**
-     * @var CartContextInterface
-     */
+    /** @var CartContextInterface */
     private $cartContext;
 
     public function __construct(

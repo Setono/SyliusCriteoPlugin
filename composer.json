@@ -8,7 +8,7 @@
         "php": "^7.2",
         "piwik/device-detector": "^3.11",
         "setono/tag-bag-bundle": "^1.0",
-        "sylius/sylius": "^1.3.0"
+        "sylius/sylius": "^1.3"
     },
     "require-dev": {
         "behat/behat": "^3.4",
@@ -22,23 +22,24 @@
         "friends-of-behat/variadic-extension": "^1.1",
         "lakion/mink-debug-extension": "^1.2.3",
         "matthiasnoback/symfony-config-test": "^4.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^3.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.0",
         "phpspec/phpspec": "^5.0",
-        "phpstan/phpstan-doctrine": "^0.10",
-        "phpstan/phpstan-shim": "^0.10",
-        "phpstan/phpstan-symfony": "^0.10",
-        "phpstan/phpstan-webmozart-assert": "^0.10",
-        "phpunit/phpunit": "^7.0",
+        "phpstan/phpstan": "^0.11",
+        "phpstan/phpstan-doctrine": "^0.11",
+        "phpstan/phpstan-strict-rules": "^0.11",
+        "phpstan/phpstan-webmozart-assert": "^0.11",
+        "phpunit/phpunit": "^8.0",
         "roave/security-advisories": "dev-master",
         "sensiolabs/security-checker": "^5.0",
         "setono/sylius-tag-bag-plugin": "^1.0",
-        "sylius-labs/coding-standard": "^2.0",
+        "sylius-labs/coding-standard": "^3.1",
         "symfony/browser-kit": "^3.4|^4.1",
         "symfony/debug-bundle": "^3.4|^4.1",
         "symfony/dotenv": "^4.2",
         "symfony/intl": "^3.4|^4.1",
         "symfony/web-profiler-bundle": "^3.4|^4.1",
-        "symfony/web-server-bundle": "^3.4|^4.1"
+        "symfony/web-server-bundle": "^3.4|^4.1",
+        "thecodingmachine/phpstan-safe-rule": "^0.1"
     },
     "prefer-stable": true,
     "autoload": {
@@ -54,23 +55,13 @@
         "sort-packages": true
     },
     "scripts": {
-        "check-style": [
-            "./vendor/bin/ecs check src",
-            "./vendor/bin/ecs check tests/Behat"
-        ],
-        "fix-style": [
-            "./vendor/bin/ecs check src --fix",
-            "./vendor/bin/ecs check tests/Behat --fix"
-        ],
-        "analyse": [
-            "@ensure-test-container-exists",
-            "./vendor/bin/phpstan analyse -c phpstan.neon -l max src"
-        ],
+        "check-style": "vendor/bin/ecs check src/ tests/Behat/",
+        "fix-style": "vendor/bin/ecs check src/ tests/Behat/ --fix",
+        "analyse": "vendor/bin/phpstan analyse -c phpstan.neon -l max src/",
         "test": [
             "@phpspec"
         ],
-        "phpspec": "./vendor/bin/phpspec run",
-        "ensure-test-container-exists": "[[ -f tests/Application/var/cache/test/ApplicationTests_Setono_SyliusCriteoPlugin_Application_KernelTestDebugContainer.xml ]] || (cd tests/Application && php -d memory_limit=-1 bin/console cache:clear --env=test)"
+        "phpspec": "vendor/bin/phpspec run"
     },
     "extra": {
         "branch-alias": {

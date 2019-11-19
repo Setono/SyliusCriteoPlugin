@@ -10,10 +10,6 @@ interface ProductIdResolverInterface
 {
     /**
      * Returns the property that you consider the id of a product
-     *
-     * @param ProductInterface $product
-     *
-     * @return string
      */
     public function resolve(ProductInterface $product): string;
 }

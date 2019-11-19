@@ -17,9 +17,7 @@ use Symfony\Component\Security\Http\FirewallMapInterface;
 
 final class ViewListSubscriber extends TagSubscriber
 {
-    /**
-     * @var ProductIdResolverInterface
-     */
+    /** @var ProductIdResolverInterface */
     private $productIdResolver;
 
     public function __construct(

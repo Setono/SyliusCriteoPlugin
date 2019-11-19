@@ -12,10 +12,6 @@ interface AccountRepositoryInterface extends RepositoryInterface
 {
     /**
      * Returns the account that is enabled on the given channel or null if no account is enabled for the given channel
-     *
-     * @param ChannelInterface $channel
-     *
-     * @return AccountInterface|null
      */
     public function findOneByChannel(ChannelInterface $channel): ?AccountInterface;
 }
