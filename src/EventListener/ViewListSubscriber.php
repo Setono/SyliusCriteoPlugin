@@ -12,8 +12,8 @@ use Setono\TagBagBundle\Tag\TwigTag;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
+use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Http\FirewallMapInterface;
 
 final class ViewListSubscriber extends TagSubscriber
 {
@@ -24,8 +24,8 @@ final class ViewListSubscriber extends TagSubscriber
         TagBagInterface $tagBag,
         AccountContextInterface $accountContext,
         ProductIdResolverInterface $productIdResolver,
-        RequestStack $requestStack = null,
-        FirewallMapInterface $firewallMap = null
+        RequestStack $requestStack,
+        FirewallMap $firewallMap
     ) {
         parent::__construct($tagBag, $accountContext, $requestStack, $firewallMap);
 

@@ -28,7 +28,7 @@ final class ProductIdExtension extends AbstractExtension
     }
 
     /**
-     * @param ProductInterface|null $product
+     * @param ProductInterface|mixed|null $product
      */
     public function productId($product): string
     {

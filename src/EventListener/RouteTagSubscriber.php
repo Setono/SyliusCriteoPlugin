@@ -6,21 +6,22 @@ namespace Setono\SyliusCriteoPlugin\EventListener;
 
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Http\FirewallMapInterface;
 
 abstract class RouteTagSubscriber extends TagSubscriber
 {
+    /** @var string */
     private $route;
 
     public function __construct(
         TagBagInterface $tagBag,
         AccountContextInterface $accountContext,
         string $route,
-        RequestStack $requestStack = null,
-        FirewallMapInterface $firewallMap = null
+        RequestStack $requestStack,
+        FirewallMap $firewallMap
     ) {
         parent::__construct($tagBag, $accountContext, $requestStack, $firewallMap);
 

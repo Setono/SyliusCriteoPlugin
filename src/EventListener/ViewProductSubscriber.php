@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
+use Safe\Exceptions\StringsException;
+use function Safe\sprintf;
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\ProductIdResolverInterface;
 use Setono\SyliusCriteoPlugin\Tag\Tags;
@@ -11,8 +13,8 @@ use Setono\TagBagBundle\Tag\ScriptTag;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Product\Model\ProductInterface;
+use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Http\FirewallMapInterface;
 
 final class ViewProductSubscriber extends TagSubscriber
 {
@@ -23,8 +25,8 @@ final class ViewProductSubscriber extends TagSubscriber
         TagBagInterface $tagBag,
         AccountContextInterface $accountContext,
         ProductIdResolverInterface $productIdResolver,
-        RequestStack $requestStack = null,
-        FirewallMapInterface $firewallMap = null
+        RequestStack $requestStack,
+        FirewallMap $firewallMap
     ) {
         parent::__construct($tagBag, $accountContext, $requestStack, $firewallMap);
 
@@ -40,6 +42,9 @@ final class ViewProductSubscriber extends TagSubscriber
         ];
     }
 
+    /**
+     * @throws StringsException
+     */
     public function add(ResourceControllerEvent $event): void
     {
         $product = $event->getSubject();

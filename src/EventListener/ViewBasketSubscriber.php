@@ -10,9 +10,9 @@ use Setono\TagBagBundle\Tag\TagInterface;
 use Setono\TagBagBundle\Tag\TwigTag;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
+use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\Security\Http\FirewallMapInterface;
 
 final class ViewBasketSubscriber extends RouteTagSubscriber
 {
@@ -24,8 +24,8 @@ final class ViewBasketSubscriber extends RouteTagSubscriber
         AccountContextInterface $accountContext,
         string $route,
         CartContextInterface $cartContext,
-        RequestStack $requestStack = null,
-        FirewallMapInterface $firewallMap = null
+        RequestStack $requestStack,
+        FirewallMap $firewallMap
     ) {
         parent::__construct($tagBag, $accountContext, $route, $requestStack, $firewallMap);
 

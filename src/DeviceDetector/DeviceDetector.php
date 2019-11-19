@@ -22,19 +22,12 @@ final class DeviceDetector implements DeviceDetectorInterface
 
     public function isMobile(): bool
     {
-        return $this->check('isMobile');
+        return $this->getDeviceDetector()->isMobile();
     }
 
     public function isTablet(): bool
     {
-        return $this->check('isTablet');
-    }
-
-    private function check(string $checkMethod): bool
-    {
-        $deviceDetector = $this->getDeviceDetector();
-
-        return $deviceDetector->{$checkMethod}();
+        return $this->getDeviceDetector()->isTablet();
     }
 
     private function getDeviceDetector(): BaseDeviceDetector
