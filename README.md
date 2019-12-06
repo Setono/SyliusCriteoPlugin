@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
-[![Build Status][ico-travis]][link-travis]
+[![Build Status][ico-github-actions]][link-github-actions]
 [![Quality Score][ico-code-quality]][link-code-quality]
 
 Sylius plugin that integrates Criteo tracking scripts
@@ -68,11 +68,11 @@ $ php bin/console doctrine:migrations:migrate
 
 Login to your Sylius app admin and go to the Criteo page and click "Create" to create a new account. Fill in the account id of your Criteo account, make sure "enable" is toggled on, and choose which channel the Criteo account should be applied to. Please notice you should only make one account for each channel, or else you will end up with undefined behaviour.
 
-[ico-version]: https://img.shields.io/packagist/v/setono/sylius-criteo-plugin.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://travis-ci.com/Setono/SyliusCriteoPlugin.svg?branch=master
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusCriteoPlugin.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/setono/sylius-criteo-plugin.svg
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg
+[ico-github-actions]: https://github.com/Setono/SyliusCriteoPlugin/workflows/build/badge.svg
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusCriteoPlugin.svg
 
 [link-packagist]: https://packagist.org/packages/setono/sylius-criteo-plugin
-[link-travis]: https://travis-ci.com/Setono/SyliusCriteoPlugin
+[link-github-actions]: https://github.com/Setono/SyliusCriteoPlugin/actions
 [link-code-quality]: https://scrutinizer-ci.com/g/Setono/SyliusCriteoPlugin
