@@ -38,12 +38,9 @@ final class DeviceDetector implements DeviceDetectorInterface
             $currentRequest = $this->requestStack->getCurrentRequest();
             if (null !== $currentRequest) {
                 $ua = $currentRequest->headers->get('User-Agent');
-                if (is_array($ua)) {
-                    $ua = $ua[0];
-                }
             }
 
-            $this->deviceDetector = new BaseDeviceDetector($ua);
+            $this->deviceDetector = new BaseDeviceDetector((string) $ua);
         }
 
         return $this->deviceDetector;
