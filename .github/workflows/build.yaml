@@ -1,4 +1,4 @@
-name: Build
+name: build
 on:
     push: ~
     pull_request: ~
@@ -6,15 +6,18 @@ on:
         - cron: 5 8 * * 3
 jobs:
     checks:
-        name: Sylius (PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }})
+        name: PHP ${{ matrix.php-versions }}
         runs-on: ${{ matrix.operating-system }}
         strategy:
             fail-fast: false
-            max-parallel: 3
             matrix:
                 operating-system: [ubuntu-latest]
                 php-versions: ['7.2', '7.3']
         steps:
+            -   name: Set environment variables
+                run: |
+                    echo "::set-env name=APP_ENV::test"
+                    echo "::set-env name=DATABASE_URL::mysql://root:root@127.0.0.1/setono_sylius_criteo?serverVersion=5.7"
             -   name: Checkout
                 uses: actions/checkout@v1
             -   name: Setup PHP, with composer and extensions
@@ -23,7 +26,7 @@ jobs:
                     php-version: ${{ matrix.php-versions }}
                     extension-csv: intl
             -   name: Install Composer dependencies
-                run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+                run: composer update --no-progress --no-suggest --prefer-dist --no-interaction
             -   name: Validate composer
                 run: composer validate --strict
             -   name: Check composer normalized
@@ -42,11 +45,5 @@ jobs:
                     (cd tests/Application && bin/console doctrine:schema:create -vvv)
                     (cd tests/Application && bin/console assets:install public -vvv)
                     (cd tests/Application && bin/console cache:warmup -vvv)
-                env:
-                    APP_ENV: test
-                    DATABASE_URL: mysql://root:root@127.0.0.1/setono_sylius_returns?serverVersion=5.5
             -   name: Run behat
                 run: vendor/bin/behat --strict -vvv --no-interaction || vendor/bin/behat --strict -vvv --no-interaction --rerun
-                env:
-                    APP_ENV: test
-                    DATABASE_URL: mysql://root:root@127.0.0.1/setono_sylius_returns?serverVersion=5.5
