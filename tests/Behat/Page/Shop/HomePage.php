@@ -10,16 +10,13 @@ class HomePage extends BaseHomePage
 {
     public function hasLibrary(string $accountId = ''): bool
     {
-        $libResult = strpos($this->getContents(), '<script src="//static.criteo.net/js/ld/ld.js" defer></script>');
+        $libResult = strpos($this->getContent(), '<script src="//static.criteo.net/js/ld/ld.js" defer></script>');
         if (false === $libResult) {
             return false;
         }
 
-        $accountResult = strpos($this->getContents(), '"setAccount", account: ' . $accountId . ' }');
-        if ($accountResult === false) {
-            return false;
-        }
+        $accountResult = strpos($this->getContent(), '"setAccount", account: ' . $accountId . ' }');
 
-        return true;
+        return !($accountResult === false);
     }
 }
