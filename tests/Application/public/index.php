@@ -1,8 +1,8 @@
 <?php
 
 use Symfony\Component\ErrorHandler\Debug;
-use Tests\Setono\SyliusCriteoPlugin\Application\Kernel;
 use Symfony\Component\HttpFoundation\Request;
+use Tests\Setono\SyliusCriteoPlugin\Application\Kernel;
 
 require dirname(__DIR__).'/config/bootstrap.php';
 
