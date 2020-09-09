@@ -6,13 +6,12 @@ namespace Setono\SyliusCriteoPlugin\EventListener;
 
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\SiteTypeResolver;
-use Setono\SyliusCriteoPlugin\Tag\Tags;
-use Setono\TagBagBundle\Tag\TagInterface;
-use Setono\TagBagBundle\Tag\TwigTag;
-use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Setono\TagBag\Tag\TagInterface;
+use Setono\TagBag\Tag\TemplateTag;
+use Setono\TagBag\TagBagInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class AddLibrarySubscriber extends TagSubscriber
@@ -41,7 +40,7 @@ final class AddLibrarySubscriber extends TagSubscriber
         ];
     }
 
-    public function add(GetResponseEvent $event): void
+    public function add(RequestEvent $event): void
     {
         $request = $event->getRequest();
 
@@ -58,20 +57,15 @@ final class AddLibrarySubscriber extends TagSubscriber
             return;
         }
 
-        $this->tagBag->add(new TwigTag(
-            '@SetonoSyliusCriteoPlugin/Tag/library.html.twig',
-            TagInterface::TYPE_HTML,
-            Tags::TAG_LIBRARY
-        ), TagBagInterface::SECTION_HEAD);
+        $tag = new TemplateTag('@SetonoSyliusCriteoPlugin/Tag/library.html.twig');
+        $tag->setSection(TagInterface::SECTION_HEAD);
+        $this->tagBag->addTag($tag);
 
-        $this->tagBag->add(new TwigTag(
-            '@SetonoSyliusCriteoPlugin/Tag/default_events.js.twig',
-            TagInterface::TYPE_SCRIPT,
-            Tags::TAG_DEFAULT_EVENTS,
-            [
-                'account_id' => $this->getAccount()->getAccountId(),
-                'site_type' => $this->siteTypeResolver->resolve(),
-            ]
-        ), TagBagInterface::SECTION_BODY_END);
+        $tag = new TemplateTag('@SetonoSyliusCriteoPlugin/Tag/default_events.js.twig', [
+            'account_id' => $this->getAccount()->getAccountId(),
+            'site_type' => $this->siteTypeResolver->resolve(),
+        ]);
+        $tag->setSection(TagInterface::SECTION_BODY_END);
+        $this->tagBag->addTag($tag);
     }
 }

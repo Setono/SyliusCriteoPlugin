@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
 use Safe\Exceptions\StringsException;
+use Setono\TagBag\Tag\ScriptTag;
+use Setono\TagBag\Tag\TagInterface;
+use Setono\TagBag\TagBagInterface;
 use function Safe\sprintf;
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\ProductIdResolverInterface;
-use Setono\SyliusCriteoPlugin\Tag\Tags;
-use Setono\TagBagBundle\Tag\ScriptTag;
-use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
@@ -61,12 +61,11 @@ final class ViewProductSubscriber extends TagSubscriber
             return;
         }
 
-        $this->tagBag->add(new ScriptTag(
-            sprintf(
-                'window.criteo_q.push({ event: "viewItem", item: "%s" });',
-                $this->productIdResolver->resolve($product)
-            ),
-            Tags::TAG_VIEW_PRODUCT
-        ), TagBagInterface::SECTION_BODY_END);
+        $tag = new ScriptTag(sprintf(
+            'window.criteo_q.push({ event: "viewItem", item: "%s" });',
+            $this->productIdResolver->resolve($product)
+        ));
+        $tag->setSection(TagInterface::SECTION_BODY_END);
+        $this->tagBag->addTag($tag);
     }
 }
