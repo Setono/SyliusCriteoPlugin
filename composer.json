@@ -13,6 +13,7 @@
         "php": "^7.3",
         "piwik/device-detector": "^3.11",
         "setono/tag-bag-bundle": "^2.0",
+        "setono/tag-bag-twig": "^1.1",
         "sylius/sylius": "^1.3",
         "thecodingmachine/safe": "^1.0"
     },

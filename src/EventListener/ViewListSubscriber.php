@@ -8,6 +8,7 @@ use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\ProductIdResolverInterface;
 use Setono\TagBag\Tag\TagInterface;
 use Setono\TagBag\Tag\TemplateTag;
+use Setono\TagBag\Tag\TwigTag;
 use Setono\TagBag\TagBagInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
@@ -73,7 +74,7 @@ final class ViewListSubscriber extends TagSubscriber
             ++$i;
         }
 
-        $tag = new TemplateTag('@SetonoSyliusCriteoPlugin/Tag/view_list.js.twig', ['products' => $productIds]);
+        $tag = new TwigTag('@SetonoSyliusCriteoPlugin/Tag/view_list.html.twig', ['products' => $productIds]);
         $tag->setSection(TagInterface::SECTION_BODY_END);
         $this->tagBag->addTag($tag);
     }

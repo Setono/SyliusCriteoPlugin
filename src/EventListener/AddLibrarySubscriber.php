@@ -7,7 +7,7 @@ namespace Setono\SyliusCriteoPlugin\EventListener;
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\SiteTypeResolver;
 use Setono\TagBag\Tag\TagInterface;
-use Setono\TagBag\Tag\TemplateTag;
+use Setono\TagBag\Tag\TwigTag;
 use Setono\TagBag\TagBagInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -57,11 +57,11 @@ final class AddLibrarySubscriber extends TagSubscriber
             return;
         }
 
-        $tag = new TemplateTag('@SetonoSyliusCriteoPlugin/Tag/library.html.twig');
+        $tag = new TwigTag('@SetonoSyliusCriteoPlugin/Tag/library.html.twig');
         $tag->setSection(TagInterface::SECTION_HEAD);
         $this->tagBag->addTag($tag);
 
-        $tag = new TemplateTag('@SetonoSyliusCriteoPlugin/Tag/default_events.js.twig', [
+        $tag = new TwigTag('@SetonoSyliusCriteoPlugin/Tag/default_events.html.twig', [
             'account_id' => $this->getAccount()->getAccountId(),
             'site_type' => $this->siteTypeResolver->resolve(),
         ]);

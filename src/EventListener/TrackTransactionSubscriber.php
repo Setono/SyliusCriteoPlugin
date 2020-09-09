@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
 use Setono\TagBag\Tag\TagInterface;
-use Setono\TagBag\Tag\TemplateTag;
+use Setono\TagBag\Tag\TwigTag;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 
@@ -36,7 +36,7 @@ final class TrackTransactionSubscriber extends TagSubscriber
             return;
         }
 
-        $tag = new TemplateTag('@SetonoSyliusCriteoPlugin/Tag/track_transaction.js.twig', ['order' => $order]);
+        $tag = new TwigTag('@SetonoSyliusCriteoPlugin/Tag/track_transaction.html.twig', ['order' => $order]);
         $tag->setSection(TagInterface::SECTION_BODY_END);
         $this->tagBag->addTag($tag);
     }
