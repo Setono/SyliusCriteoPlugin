@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
-use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Setono\TagBag\TagBagInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 abstract class RouteTagSubscriber extends TagSubscriber
@@ -37,9 +37,9 @@ abstract class RouteTagSubscriber extends TagSubscriber
         ];
     }
 
-    abstract public function add(GetResponseEvent $event): void;
+    abstract public function add(RequestEvent $event): void;
 
-    protected function guardRoute(GetResponseEvent $event): bool
+    protected function guardRoute(RequestEvent $event): bool
     {
         $request = $event->getRequest();
 

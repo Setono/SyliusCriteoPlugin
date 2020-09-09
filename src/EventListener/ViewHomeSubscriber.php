@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
-use Setono\SyliusCriteoPlugin\Tag\Tags;
-use Setono\TagBagBundle\Tag\ScriptTag;
-use Setono\TagBagBundle\TagBag\TagBagInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Setono\TagBag\Tag\ScriptTag;
+use Setono\TagBag\Tag\TagInterface;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 final class ViewHomeSubscriber extends RouteTagSubscriber
 {
-    public function add(GetResponseEvent $event): void
+    public function add(RequestEvent $event): void
     {
         if (!$this->guardRoute($event)) {
             return;
@@ -21,6 +20,8 @@ final class ViewHomeSubscriber extends RouteTagSubscriber
             return;
         }
 
-        $this->tagBag->add(new ScriptTag('window.criteo_q.push({ event: "viewHome"});', Tags::TAG_VIEW_HOME), TagBagInterface::SECTION_BODY_END);
+        $tag = new ScriptTag('window.criteo_q.push({ event: "viewHome"});');
+        $tag->setSection(TagInterface::SECTION_BODY_END);
+        $this->tagBag->addTag($tag);
     }
 }

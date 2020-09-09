@@ -7,7 +7,7 @@ namespace Setono\SyliusCriteoPlugin\EventListener;
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Exception\MissingAccount;
 use Setono\SyliusCriteoPlugin\Model\AccountInterface;
-use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Setono\TagBag\TagBagInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
