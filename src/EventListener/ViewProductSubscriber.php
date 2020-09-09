@@ -6,11 +6,11 @@ namespace Setono\SyliusCriteoPlugin\EventListener;
 
 use Safe\Exceptions\StringsException;
 use function Safe\sprintf;
+use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
+use Setono\SyliusCriteoPlugin\Resolver\ProductIdResolverInterface;
 use Setono\TagBag\Tag\ScriptTag;
 use Setono\TagBag\Tag\TagInterface;
 use Setono\TagBag\TagBagInterface;
-use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
-use Setono\SyliusCriteoPlugin\Resolver\ProductIdResolverInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;

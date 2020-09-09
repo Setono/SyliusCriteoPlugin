@@ -7,7 +7,6 @@ namespace Setono\SyliusCriteoPlugin\EventListener;
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\ProductIdResolverInterface;
 use Setono\TagBag\Tag\TagInterface;
-use Setono\TagBag\Tag\TemplateTag;
 use Setono\TagBag\Tag\TwigTag;
 use Setono\TagBag\TagBagInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;

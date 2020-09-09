@@ -6,7 +6,6 @@ namespace Setono\SyliusCriteoPlugin\EventListener;
 
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\TagBag\Tag\TagInterface;
-use Setono\TagBag\Tag\TemplateTag;
 use Setono\TagBag\Tag\TwigTag;
 use Setono\TagBag\TagBagInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
