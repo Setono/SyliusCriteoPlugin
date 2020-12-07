@@ -38,7 +38,7 @@
         "phpstan/phpstan-doctrine": "^0.12",
         "phpstan/phpstan-strict-rules": "^0.12",
         "phpstan/phpstan-webmozart-assert": "^0.12",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.5",
         "roave/security-advisories": "dev-master",
         "sensiolabs/security-checker": "^6.0",
         "setono/sylius-tag-bag-plugin": "^1.1",
