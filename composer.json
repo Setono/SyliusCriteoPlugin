@@ -33,7 +33,7 @@
         "lakion/mink-debug-extension": "^1.2.3",
         "matthiasnoback/symfony-config-test": "^4.0",
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
-        "phpspec/phpspec": "^6.0",
+        "phpspec/phpspec": "^7.1",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-doctrine": "^0.12",
         "phpstan/phpstan-strict-rules": "^0.12",
