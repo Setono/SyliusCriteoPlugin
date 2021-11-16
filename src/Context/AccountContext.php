@@ -10,11 +10,9 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 
 final class AccountContext implements AccountContextInterface
 {
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    private ChannelContextInterface $channelContext;
 
-    /** @var AccountRepositoryInterface */
-    private $accountRepository;
+    private AccountRepositoryInterface $accountRepository;
 
     public function __construct(ChannelContextInterface $channelContext, AccountRepositoryInterface $accountRepository)
     {

@@ -18,8 +18,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ViewProductSubscriber extends TagSubscriber
 {
-    /** @var ProductIdResolverInterface */
-    private $productIdResolver;
+    private ProductIdResolverInterface $productIdResolver;
 
     public function __construct(
         TagBagInterface $tagBag,

@@ -16,8 +16,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class AddLibrarySubscriber extends TagSubscriber
 {
-    /** @var SiteTypeResolver */
-    private $siteTypeResolver;
+    private SiteTypeResolver $siteTypeResolver;
 
     public function __construct(
         TagBagInterface $tagBag,

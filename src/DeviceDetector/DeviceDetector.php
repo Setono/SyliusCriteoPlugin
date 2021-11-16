@@ -9,11 +9,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class DeviceDetector implements DeviceDetectorInterface
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var BaseDeviceDetector */
-    private $deviceDetector;
+    private BaseDeviceDetector $deviceDetector;
 
     public function __construct(RequestStack $requestStack)
     {

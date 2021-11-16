@@ -12,7 +12,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 class AccountRepository extends EntityRepository implements AccountRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function findOneByChannel(ChannelInterface $channel): ?AccountInterface
     {

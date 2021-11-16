@@ -11,17 +11,14 @@ class Account implements AccountInterface
 {
     use ToggleableTrait;
 
-    /** @var int */
-    protected $id;
+    protected int $id;
 
-    /** @var string */
-    protected $accountId;
+    protected string $accountId;
 
-    /** @var ChannelInterface */
-    protected $channel;
+    protected ChannelInterface $channel;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getId(): ?int
     {
@@ -29,7 +26,7 @@ class Account implements AccountInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getAccountId(): ?string
     {
@@ -37,7 +34,7 @@ class Account implements AccountInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function setAccountId(string $accountId): void
     {
@@ -45,7 +42,7 @@ class Account implements AccountInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getChannel(): ?ChannelInterface
     {
@@ -53,7 +50,7 @@ class Account implements AccountInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function setChannel(ChannelInterface $channel): void
     {
