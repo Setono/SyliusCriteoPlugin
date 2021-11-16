@@ -3,7 +3,6 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![Build Status][ico-github-actions]][link-github-actions]
-[![Quality Score][ico-code-quality]][link-code-quality]
 
 Sylius plugin that integrates Criteo tracking scripts
 
@@ -71,8 +70,6 @@ Login to your Sylius app admin and go to the Criteo page and click "Create" to c
 [ico-version]: https://img.shields.io/packagist/v/setono/sylius-criteo-plugin.svg
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg
 [ico-github-actions]: https://github.com/Setono/SyliusCriteoPlugin/workflows/build/badge.svg
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusCriteoPlugin.svg
 
 [link-packagist]: https://packagist.org/packages/setono/sylius-criteo-plugin
 [link-github-actions]: https://github.com/Setono/SyliusCriteoPlugin/actions
-[link-code-quality]: https://scrutinizer-ci.com/g/Setono/SyliusCriteoPlugin
