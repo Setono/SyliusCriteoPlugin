@@ -19,7 +19,7 @@ abstract class TagSubscriber implements EventSubscriberInterface
 
     protected AccountContextInterface $accountContext;
 
-    private ?AccountInterface $account = null;
+    private AccountInterface $account;
 
     private ?bool $hasAccount = null;
 
@@ -41,6 +41,8 @@ abstract class TagSubscriber implements EventSubscriberInterface
 
     /**
      * Returns true if an account was found for current account context
+     *
+     * @psalm-assert-if-true AccountInterface $this->account
      */
     protected function hasAccount(): bool
     {
