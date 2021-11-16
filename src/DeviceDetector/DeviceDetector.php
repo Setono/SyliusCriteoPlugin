@@ -11,7 +11,7 @@ final class DeviceDetector implements DeviceDetectorInterface
 {
     private RequestStack $requestStack;
 
-    private BaseDeviceDetector $deviceDetector;
+    private ?BaseDeviceDetector $deviceDetector = null;
 
     public function __construct(RequestStack $requestStack)
     {

@@ -21,7 +21,7 @@ abstract class TagSubscriber implements EventSubscriberInterface
 
     private AccountInterface $account;
 
-    private bool $hasAccount;
+    private ?bool $hasAccount = null;
 
     private RequestStack $requestStack;
 

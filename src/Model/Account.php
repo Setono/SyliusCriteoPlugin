@@ -11,47 +11,32 @@ class Account implements AccountInterface
 {
     use ToggleableTrait;
 
-    protected int $id;
+    protected ?int $id = null;
 
-    protected string $accountId;
+    protected ?string $accountId = null;
 
-    protected ChannelInterface $channel;
+    protected ?ChannelInterface $channel = null;
 
-    /**
-     * @inheritdoc
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getAccountId(): ?string
     {
         return $this->accountId;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setAccountId(string $accountId): void
     {
         $this->accountId = $accountId;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getChannel(): ?ChannelInterface
     {
         return $this->channel;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setChannel(ChannelInterface $channel): void
     {
         $this->channel = $channel;
