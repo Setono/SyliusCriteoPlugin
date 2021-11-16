@@ -11,11 +11,9 @@ final class SiteTypeResolver implements SiteTypeResolverInterface
 {
     private const SESSION_KEY = 'setono_sylius_criteo_site_type';
 
-    /** @var DeviceDetectorInterface */
-    private $deviceDetector;
+    private DeviceDetectorInterface $deviceDetector;
 
-    /** @var SessionInterface */
-    private $session;
+    private SessionInterface $session;
 
     public function __construct(DeviceDetectorInterface $deviceDetector, SessionInterface $session)
     {

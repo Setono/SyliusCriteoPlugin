@@ -13,8 +13,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 abstract class RouteTagSubscriber extends TagSubscriber
 {
-    /** @var string */
-    private $route;
+    private string $route;
 
     public function __construct(
         TagBagInterface $tagBag,

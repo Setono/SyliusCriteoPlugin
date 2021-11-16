@@ -15,23 +15,17 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 abstract class TagSubscriber implements EventSubscriberInterface
 {
-    /** @var TagBagInterface */
-    protected $tagBag;
+    protected TagBagInterface $tagBag;
 
-    /** @var AccountContextInterface */
-    protected $accountContext;
+    protected AccountContextInterface $accountContext;
 
-    /** @var AccountInterface */
-    private $account;
+    private AccountInterface $account;
 
-    /** @var bool */
-    private $hasAccount;
+    private ?bool $hasAccount = null;
 
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var FirewallMap */
-    private $firewallMap;
+    private FirewallMap $firewallMap;
 
     public function __construct(
         TagBagInterface $tagBag,
@@ -47,6 +41,8 @@ abstract class TagSubscriber implements EventSubscriberInterface
 
     /**
      * Returns true if an account was found for current account context
+     *
+     * @psalm-assert-if-true AccountInterface $this->account
      */
     protected function hasAccount(): bool
     {

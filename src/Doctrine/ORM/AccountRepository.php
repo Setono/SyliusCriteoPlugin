@@ -11,9 +11,6 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 
 class AccountRepository extends EntityRepository implements AccountRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByChannel(ChannelInterface $channel): ?AccountInterface
     {
         return $this->createQueryBuilder('o')

@@ -15,8 +15,7 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 final class ViewBasketSubscriber extends RouteTagSubscriber
 {
-    /** @var CartContextInterface */
-    private $cartContext;
+    private CartContextInterface $cartContext;
 
     public function __construct(
         TagBagInterface $tagBag,
