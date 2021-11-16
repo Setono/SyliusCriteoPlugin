@@ -19,7 +19,7 @@ abstract class TagSubscriber implements EventSubscriberInterface
 
     protected AccountContextInterface $accountContext;
 
-    private AccountInterface $account;
+    private ?AccountInterface $account = null;
 
     private ?bool $hasAccount = null;
 
