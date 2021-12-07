@@ -1,14 +1,14 @@
 {
     "name": "setono/sylius-criteo-plugin",
-    "type": "sylius-plugin",
     "description": "Sylius plugin integrating Criteo tracking scripts",
+    "license": "MIT",
+    "type": "sylius-plugin",
     "keywords": [
         "sylius",
         "sylius-plugin",
         "setono",
         "criteo"
     ],
-    "license": "MIT",
     "require": {
         "php": ">=7.4",
         "knplabs/knp-menu": "^3.3",
@@ -46,14 +46,7 @@
         "symfony/web-profiler-bundle": "^5.0",
         "weirdan/doctrine-psalm-plugin": "^1.1"
     },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
-    },
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Setono\\SyliusCriteoPlugin\\": "src/"
@@ -67,7 +60,14 @@
             "tests/Application/Kernel.php"
         ]
     },
-    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
     "scripts": {
         "analyse": [
             "@ensure-test-container-exists",
