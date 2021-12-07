@@ -56,7 +56,9 @@ final class AddLibrarySubscriber extends TagSubscriber
             return;
         }
 
-        $tag = new TwigTag('@SetonoSyliusCriteoPlugin/Tag/library.html.twig');
+        $tag = new TwigTag('@SetonoSyliusCriteoPlugin/Tag/library.html.twig', [
+            'account_id' => $this->getAccount()->getAccountId(),
+        ]);
         $tag->setSection(TagInterface::SECTION_HEAD);
         $this->tagBag->addTag($tag);
 
