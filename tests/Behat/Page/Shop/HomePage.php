@@ -10,7 +10,7 @@ class HomePage extends BaseHomePage
 {
     public function hasLibrary(string $accountId = ''): bool
     {
-        $libResult = strpos($this->getContent(), '<script src="//static.criteo.net/js/ld/ld.js" defer></script>');
+        $libResult = strpos($this->getContent(), sprintf('<script src="//dynamic.criteo.com/js/ld/ld.js?a=%s" defer></script>', $accountId));
         if (false === $libResult) {
             return false;
         }
