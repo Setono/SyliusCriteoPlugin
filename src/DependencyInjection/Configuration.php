@@ -20,6 +20,7 @@ final class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('setono_sylius_criteo');
         $rootNode = $treeBuilder->getRootNode();
 
+        /** @psalm-suppress MixedMethodCall,PossiblyUndefinedMethod */
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()

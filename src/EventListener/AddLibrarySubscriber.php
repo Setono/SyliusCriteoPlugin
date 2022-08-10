@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
+use Setono\MainRequestTrait\MainRequestTrait;
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\SiteTypeResolver;
 use Setono\TagBag\Tag\TagInterface;
-use Setono\TagBag\Tag\TwigTag;
+use Setono\TagBag\Tag\TemplateTag;
 use Setono\TagBag\TagBagInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -16,6 +17,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class AddLibrarySubscriber extends TagSubscriber
 {
+    use MainRequestTrait;
+
     private SiteTypeResolver $siteTypeResolver;
 
     public function __construct(
@@ -43,7 +46,7 @@ final class AddLibrarySubscriber extends TagSubscriber
     {
         $request = $event->getRequest();
 
-        if (!$event->isMasterRequest() || !$this->isShopContext($request)) {
+        if (!$this->isMainRequest($event) || !$this->isShopContext($request)) {
             return;
         }
 
@@ -56,17 +59,15 @@ final class AddLibrarySubscriber extends TagSubscriber
             return;
         }
 
-        $tag = new TwigTag('@SetonoSyliusCriteoPlugin/Tag/library.html.twig', [
+        $tag = TemplateTag::create('@SetonoSyliusCriteoPlugin/Tag/library.html.twig', [
             'account_id' => $this->getAccount()->getAccountId(),
-        ]);
-        $tag->setSection(TagInterface::SECTION_HEAD);
-        $this->tagBag->addTag($tag);
+        ])->withSection(TagInterface::SECTION_HEAD);
+        $this->tagBag->add($tag);
 
-        $tag = new TwigTag('@SetonoSyliusCriteoPlugin/Tag/default_events.html.twig', [
+        $tag = TemplateTag::create('@SetonoSyliusCriteoPlugin/Tag/default_events.html.twig', [
             'account_id' => $this->getAccount()->getAccountId(),
             'site_type' => $this->siteTypeResolver->resolve(),
-        ]);
-        $tag->setSection(TagInterface::SECTION_BODY_END);
-        $this->tagBag->addTag($tag);
+        ])->withSection(TagInterface::SECTION_BODY_END);
+        $this->tagBag->add($tag);
     }
 }

@@ -8,7 +8,7 @@ use Safe\Exceptions\StringsException;
 use function Safe\sprintf;
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\ProductIdResolverInterface;
-use Setono\TagBag\Tag\ScriptTag;
+use Setono\TagBag\Tag\InlineScriptTag;
 use Setono\TagBag\Tag\TagInterface;
 use Setono\TagBag\TagBagInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
@@ -60,11 +60,10 @@ final class ViewProductSubscriber extends TagSubscriber
             return;
         }
 
-        $tag = new ScriptTag(sprintf(
+        $tag = InlineScriptTag::create(sprintf(
             'window.criteo_q.push({ event: "viewItem", item: "%s" });',
             $this->productIdResolver->resolve($product)
-        ));
-        $tag->setSection(TagInterface::SECTION_BODY_END);
-        $this->tagBag->addTag($tag);
+        ))->withSection(TagInterface::SECTION_BODY_END);
+        $this->tagBag->add($tag);
     }
 }

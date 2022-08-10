@@ -11,14 +11,12 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SetonoSyliusCriteoExtension extends AbstractResourceExtension
 {
-    /**
-     * @inheritdoc
-     *
-     * @throws \Exception
-     */
-    public function load(array $config, ContainerBuilder $container): void
+    public function load(array $configs, ContainerBuilder $container): void
     {
-        $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
+        /**
+         * @var array{driver: string, resources: array<string, mixed>, routes: array<string, string>} $config
+         */
+        $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load('services.xml');

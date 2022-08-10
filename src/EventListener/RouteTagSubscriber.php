@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
+use Setono\MainRequestTrait\MainRequestTrait;
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\TagBag\TagBagInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
@@ -13,6 +14,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 abstract class RouteTagSubscriber extends TagSubscriber
 {
+    use MainRequestTrait;
+
     private string $route;
 
     public function __construct(
@@ -42,7 +45,7 @@ abstract class RouteTagSubscriber extends TagSubscriber
     {
         $request = $event->getRequest();
 
-        if (!$event->isMasterRequest() || !$this->isShopContext($request)) {
+        if (!$this->isMainRequest($event) || !$this->isShopContext($request)) {
             return false;
         }
 
