@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
-use Safe\Exceptions\StringsException;
-use function Safe\sprintf;
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\ProductIdResolverInterface;
 use Setono\TagBag\Tag\InlineScriptTag;
@@ -41,9 +39,6 @@ final class ViewProductSubscriber extends TagSubscriber
         ];
     }
 
-    /**
-     * @throws StringsException
-     */
     public function add(ResourceControllerEvent $event): void
     {
         $product = $event->getSubject();
