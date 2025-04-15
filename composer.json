@@ -48,7 +48,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Setono\\SyliusCriteoPlugin\\": "tests/"
+            "Setono\\SyliusCriteoPlugin\\Tests\\": "tests/"
         },
         "classmap": [
             "tests/Application/Kernel.php"

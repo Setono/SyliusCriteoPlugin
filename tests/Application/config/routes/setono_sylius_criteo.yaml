@@ -1,0 +1,2 @@
+setono_sylius_criteo:
+    resource: "@SetonoSyliusCriteoPlugin/Resources/config/routing.yaml"
