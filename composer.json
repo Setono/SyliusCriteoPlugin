@@ -34,6 +34,7 @@
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
+        "babdev/pagerfanta-bundle": "^3.8",
         "matthiasnoback/symfony-config-test": "^5.2",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpunit/phpunit": "^9.6",
