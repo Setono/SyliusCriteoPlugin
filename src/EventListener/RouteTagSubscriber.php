@@ -23,7 +23,7 @@ abstract class RouteTagSubscriber extends TagSubscriber
         AccountContextInterface $accountContext,
         string $route,
         RequestStack $requestStack,
-        FirewallMap $firewallMap
+        FirewallMap $firewallMap,
     ) {
         parent::__construct($tagBag, $accountContext, $requestStack, $firewallMap);
 

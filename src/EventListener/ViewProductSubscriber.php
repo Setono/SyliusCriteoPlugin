@@ -23,7 +23,7 @@ final class ViewProductSubscriber extends TagSubscriber
         AccountContextInterface $accountContext,
         ProductIdResolverInterface $productIdResolver,
         RequestStack $requestStack,
-        FirewallMap $firewallMap
+        FirewallMap $firewallMap,
     ) {
         parent::__construct($tagBag, $accountContext, $requestStack, $firewallMap);
 
@@ -57,7 +57,7 @@ final class ViewProductSubscriber extends TagSubscriber
 
         $tag = InlineScriptTag::create(sprintf(
             'window.criteo_q.push({ event: "viewItem", item: "%s" });',
-            $this->productIdResolver->resolve($product)
+            $this->productIdResolver->resolve($product),
         ))->withSection(TagInterface::SECTION_BODY_END);
         $this->tagBag->add($tag);
     }

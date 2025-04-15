@@ -26,7 +26,7 @@ final class AddLibrarySubscriber extends TagSubscriber
         AccountContextInterface $accountContext,
         SiteTypeResolver $siteTypeResolver,
         RequestStack $requestStack,
-        FirewallMap $firewallMap
+        FirewallMap $firewallMap,
     ) {
         parent::__construct($tagBag, $accountContext, $requestStack, $firewallMap);
 

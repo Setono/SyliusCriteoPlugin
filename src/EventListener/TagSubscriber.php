@@ -31,7 +31,7 @@ abstract class TagSubscriber implements EventSubscriberInterface
         TagBagInterface $tagBag,
         AccountContextInterface $accountContext,
         RequestStack $requestStack,
-        FirewallMap $firewallMap
+        FirewallMap $firewallMap,
     ) {
         $this->tagBag = $tagBag;
         $this->accountContext = $accountContext;

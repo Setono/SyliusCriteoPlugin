@@ -29,7 +29,7 @@ final class ConfigurationTest extends TestCase
                         'home' => 'test',
                     ],
                 ],
-            ]
+            ],
         );
     }
 }

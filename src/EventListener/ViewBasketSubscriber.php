@@ -23,7 +23,7 @@ final class ViewBasketSubscriber extends RouteTagSubscriber
         string $route,
         CartContextInterface $cartContext,
         RequestStack $requestStack,
-        FirewallMap $firewallMap
+        FirewallMap $firewallMap,
     ) {
         parent::__construct($tagBag, $accountContext, $route, $requestStack, $firewallMap);
 

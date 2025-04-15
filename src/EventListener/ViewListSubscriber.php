@@ -23,7 +23,7 @@ final class ViewListSubscriber extends TagSubscriber
         AccountContextInterface $accountContext,
         ProductIdResolverInterface $productIdResolver,
         RequestStack $requestStack,
-        FirewallMap $firewallMap
+        FirewallMap $firewallMap,
     ) {
         parent::__construct($tagBag, $accountContext, $requestStack, $firewallMap);
 
