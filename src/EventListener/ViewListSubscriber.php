@@ -11,6 +11,7 @@ use Setono\TagBag\Tag\TemplateTag;
 use Setono\TagBag\TagBagInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -33,14 +34,13 @@ final class ViewListSubscriber extends TagSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
-            'sylius.product.index' => [
-                'add',
-            ],
+            'sylius.product.index' => 'add',
         ];
     }
 
     public function add(ResourceControllerEvent $event): void
     {
+        /** @var mixed $subject */
         $subject = $event->getSubject();
 
         if (!$this->isShopContext()) {
@@ -48,6 +48,7 @@ final class ViewListSubscriber extends TagSubscriber
         }
 
         if ($subject instanceof ResourceGridView) {
+            /** @var mixed $products */
             $products = $subject->getData();
         } elseif (is_iterable($subject)) {
             $products = $subject;
@@ -55,7 +56,7 @@ final class ViewListSubscriber extends TagSubscriber
             return;
         }
 
-        if (!$this->hasAccount()) {
+        if (!is_iterable($products) || !$this->hasAccount()) {
             return;
         }
 
@@ -63,6 +64,10 @@ final class ViewListSubscriber extends TagSubscriber
 
         $i = 0;
         foreach ($products as $product) {
+            if (!$product instanceof ProductInterface) {
+                return;
+            }
+
             if ($i >= 3) {
                 break;
             }

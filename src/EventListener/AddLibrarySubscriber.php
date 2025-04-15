@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\SyliusCriteoPlugin\EventListener;
 
-use Setono\MainRequestTrait\MainRequestTrait;
 use Setono\SyliusCriteoPlugin\Context\AccountContextInterface;
 use Setono\SyliusCriteoPlugin\Resolver\SiteTypeResolver;
 use Setono\TagBag\Tag\TagInterface;
@@ -17,8 +16,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class AddLibrarySubscriber extends TagSubscriber
 {
-    use MainRequestTrait;
-
     private SiteTypeResolver $siteTypeResolver;
 
     public function __construct(
@@ -46,7 +43,7 @@ final class AddLibrarySubscriber extends TagSubscriber
     {
         $request = $event->getRequest();
 
-        if (!$this->isMainRequest($event) || !$this->isShopContext($request)) {
+        if (!$event->isMainRequest() || !$this->isShopContext($request)) {
             return;
         }
 

@@ -14,6 +14,8 @@ final class SetonoSyliusCriteoExtension extends AbstractResourceExtension
     public function load(array $configs, ContainerBuilder $container): void
     {
         /**
+         * @psalm-suppress PossiblyNullArgument
+         *
          * @var array{driver: string, resources: array<string, mixed>, routes: array<string, string>} $config
          */
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);

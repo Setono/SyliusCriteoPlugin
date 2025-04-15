@@ -28,4 +28,8 @@
         <function name="var_dump"/>
         <function name="print_r"/>
     </forbiddenFunctions>
+    <issueHandlers>
+        <MissingOverrideAttribute errorLevel="suppress"/>
+        <ClassMustBeFinal errorLevel="suppress"/>
+    </issueHandlers>
 </psalm>

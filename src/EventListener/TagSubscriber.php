@@ -19,9 +19,7 @@ abstract class TagSubscriber implements EventSubscriberInterface
 
     protected AccountContextInterface $accountContext;
 
-    private AccountInterface $account;
-
-    private ?bool $hasAccount = null;
+    private AccountInterface|false|null $account = false;
 
     private RequestStack $requestStack;
 
@@ -40,23 +38,17 @@ abstract class TagSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Returns true if an account was found for current account context
+     * Returns true if an account was found for the current account context
      *
      * @psalm-assert-if-true AccountInterface $this->account
      */
     protected function hasAccount(): bool
     {
-        if (null === $this->hasAccount) {
-            $account = $this->accountContext->getAccount();
-            if (null !== $account) {
-                $this->account = $account;
-                $this->hasAccount = true;
-            } else {
-                $this->hasAccount = false;
-            }
+        if (false === $this->account) {
+            $this->account = $this->accountContext->getAccount();
         }
 
-        return $this->hasAccount;
+        return null !== $this->account;
     }
 
     /**
